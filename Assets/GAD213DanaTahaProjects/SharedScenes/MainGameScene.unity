@@ -416,7 +416,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c46e22673e3e56b499bb9952e21f86d9, type: 3}
   m_PrefabInstance: {fileID: 1408770886}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &928398644
+--- !u!114 &928398644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928398641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6e8545894aa8e49bca39aa70c92d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 720
+  dashKey: 304
+  dashCooldown: 2
+--- !u!143 &928398645
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,13 +450,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.76
-  m_Radius: 0.26
+  m_Height: 2
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.81, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1408770886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -494,6 +509,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ch38_nonPBR@Breathing Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c46e22673e3e56b499bb9952e21f86d9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5d3a0571a92fce6428de3967916e4675, type: 2}
+    - target: {fileID: 5866666021909216657, guid: c46e22673e3e56b499bb9952e21f86d9, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -501,6 +524,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c46e22673e3e56b499bb9952e21f86d9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 928398644}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c46e22673e3e56b499bb9952e21f86d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 928398645}
   m_SourcePrefab: {fileID: 100100000, guid: c46e22673e3e56b499bb9952e21f86d9, type: 3}
 --- !u!1 &1690695804
 GameObject:
