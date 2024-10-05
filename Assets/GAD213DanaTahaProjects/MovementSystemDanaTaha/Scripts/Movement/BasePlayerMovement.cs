@@ -12,29 +12,29 @@ public class BasePlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     // Animation Parameter Labels.
-    private string _idle = "PlayerNotMoving";
-    private string _run = "PlayerRunning";
+    protected string _idle = "PlayerNotMoving";
+    protected string _run = "PlayerRunning";
 
     // Animation and controller.
-    private Animator _animator;
-    private CharacterController _controller;
+    protected Animator _animator;
+    protected CharacterController _controller;
 
     // Movement Variables.
-    private Vector3 _inputDirection = Vector3.zero;
-    private bool _isRunning = false;
+    protected Vector3 _inputDirection = Vector3.zero;
+    protected bool _isRunning = false;
 
     // 'False' gravity Variables.
-    private Vector3 _velocity;
-    private bool _isGrounded;
+    protected Vector3 _velocity;
+    protected bool _isGrounded;
     #endregion
 
-    private void Start()
+    protected virtual void Start()
     {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         CheckGroundStatus();
         HandleMovementInput();
@@ -68,7 +68,6 @@ public class BasePlayerMovement : MonoBehaviour
 
         _inputDirection = inputDir;
 
-        // To be fixed because it's juttery due to no exit time..
         _isRunning = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
     }
 
@@ -96,7 +95,7 @@ public class BasePlayerMovement : MonoBehaviour
     /// <summary>
     /// Updates Animator parameters based on movement.
     /// </summary>
-    private void UpdateAnimatorParameters()
+    protected virtual void UpdateAnimatorParameters()
     {
         if (_inputDirection != Vector3.zero)
         {
