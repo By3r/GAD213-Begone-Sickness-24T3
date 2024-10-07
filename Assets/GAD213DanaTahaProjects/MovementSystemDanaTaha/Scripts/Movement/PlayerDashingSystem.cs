@@ -88,13 +88,17 @@ public class PlayerDashingSystem : BasePlayerMovement
         _isDashing = true;
         _dashTimer = dashDuration;
 
+        CharacterController controller = GetComponent<CharacterController>();
+
         currentStamina -= dashStaminaCost;
         currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
 
         _animator.SetBool(_dash, true);
-
         _animator.SetBool(_run, false);
         _animator.SetBool(_idle, false);
+
+        Vector3 dashDirection = transform.forward;
+        transform.position += dashDirection * dashDuration * 5f; 
     }
 
     /// <summary>
@@ -147,7 +151,7 @@ public class PlayerDashingSystem : BasePlayerMovement
         {
             staminaFillImage.color = currentStamina <= 20f ? Color.red : Color.green;
         }
-        
+
     }
 
     /// <summary>
