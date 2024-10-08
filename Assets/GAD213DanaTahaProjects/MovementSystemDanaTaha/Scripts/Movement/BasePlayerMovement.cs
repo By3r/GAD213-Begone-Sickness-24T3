@@ -26,6 +26,10 @@ public class BasePlayerMovement : MonoBehaviour
     // 'False' gravity Variables.
     protected Vector3 _velocity;
     protected bool _isGrounded;
+
+    // Script References.
+    [SerializeField] private Player_ClimbingSystem climbingSystemScript; 
+
     #endregion
 
     protected virtual void Start()
@@ -36,7 +40,11 @@ public class BasePlayerMovement : MonoBehaviour
 
     protected virtual void Update()
     {
-        CheckGroundStatus();
+        if (!climbingSystemScript.IsClimbing()) 
+        {
+            CheckGroundStatus();
+        }
+
         HandleMovementInput();
         ApplyGravity();
         PlayerRotation();
@@ -52,7 +60,7 @@ public class BasePlayerMovement : MonoBehaviour
         _isGrounded = _controller.isGrounded;
         if (_isGrounded && _velocity.y < 0)
         {
-            _velocity.y = -2f; // Adds force to fake gravity.
+            _velocity.y = -5f; // Adds force to fake gravity.
         }
     }
 
@@ -72,12 +80,15 @@ public class BasePlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Applies gravity feel to the player.
+    /// Applies gravity feel to the player, but only if they are not climbing.
     /// </summary>
     private void ApplyGravity()
     {
-        _velocity.y += gravity * Time.deltaTime;
-        _controller.Move(_velocity * Time.deltaTime);
+        if (!climbingSystemScript.IsClimbing()) 
+        {
+            _velocity.y += gravity * Time.deltaTime;
+            _controller.Move(_velocity * Time.deltaTime);
+        }
     }
 
     /// <summary>
@@ -90,6 +101,24 @@ public class BasePlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(_inputDirection);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+    }
+
+    ///<summary>
+    /// Checks whether the player touched a climbable wall to climb or not.
+    /// </summary>
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.gameObject.GetComponent<ClimbableWall>() && Input.GetAxis("Vertical") > 0)
+        {
+            Debug.Log("Player can climb");
+            climbingSystemScript.StartClimbing();
+        }
+        else if (!hit.collider.gameObject.GetComponent<ClimbableWall>())
+        {
+            Debug.Log("Player will not climb");
+            climbingSystemScript.StopClimbing();
+        }
+
     }
 
     /// <summary>
