@@ -7,7 +7,11 @@ public class Player_ClimbingSystem : MonoBehaviour
     [SerializeField] private float climbingSpeed = 5f;
     [SerializeField] private bool isClimbing = false;
     [SerializeField] private CharacterController characterController;
-    [SerializeField] private Vector3 playerClimbDirection;
+    [SerializeField] private LayerMask climbableLayer; 
+    [SerializeField] private float wallCheckDistance = 1f; 
+
+    private Vector3 _playerClimbDirection;
+    private float _lastInputTime; 
 
     #endregion
 
@@ -21,51 +25,77 @@ public class Player_ClimbingSystem : MonoBehaviour
         if (isClimbing)
         {
             ClimbingMovementLogic();
+
+            if (!IsNearClimbableWall())
+            {
+                Debug.Log("Player moved away from the wall, stopping climbing.");
+                StopClimbing();
+            }
         }
+
         if (Input.GetKeyDown(KeyCode.G) && isClimbing)
         {
             CancelTheClimb();
         }
-        if (Input.GetAxis("Vertical") > 0 && isClimbing)
-        {
-            // Stop climbing in whatever position the player is at currently.
-        }
     }
 
-    #region Public Functions.
+    #region Public Functions
     public void StartClimbing()
     {
-        isClimbing = true; 
+        isClimbing = true;
     }
 
     public void StopClimbing()
     {
-        isClimbing = false;
+        isClimbing = false; 
     }
 
-    public bool IsClimbing() 
+    public bool IsClimbing()
     {
         return isClimbing; 
     }
     #endregion
 
-
-    #region Private Functions.
+    #region Private Functions
     private void ClimbingMovementLogic()
     {
-        float _vertical = Input.GetAxis("Vertical");
-        float _horizontal = Input.GetAxis("Horizontal");
+        float verticalInput = 0;
 
-        playerClimbDirection = new Vector3(_horizontal, _vertical, 0);
-        Debug.Log("Player is trying to climb " + playerClimbDirection);
-        characterController.Move(playerClimbDirection * climbingSpeed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.W))
+        {
+            verticalInput = 1f; 
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            verticalInput = -1f; 
+        }
+
+        if (verticalInput != 0)
+        {
+            _lastInputTime = Time.time; 
+        }
+
+        _playerClimbDirection = new Vector3(0, verticalInput, 0);
+        characterController.Move(_playerClimbDirection * climbingSpeed * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Checks if the player is near a climbable wall.
+    /// </summary>
+    private bool IsNearClimbableWall()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, wallCheckDistance, climbableLayer))
+        {
+            return true; 
+        }
+
+        return false;
     }
 
     private void CancelTheClimb()
     {
         StopClimbing(); 
     }
-
     #endregion
-
 }

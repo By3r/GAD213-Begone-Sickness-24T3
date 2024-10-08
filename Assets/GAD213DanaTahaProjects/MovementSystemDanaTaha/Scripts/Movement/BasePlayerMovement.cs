@@ -5,6 +5,7 @@ public class BasePlayerMovement : MonoBehaviour
     #region Variables
     [Header("Rotation Settings")]
     public float rotationSpeed = 400f;
+    public float mouseSensitivity = 2.0f; // Sensitivity for mouse rotation
 
     [Header("Gravity Settings")]
     public float gravity = -9.81f;
@@ -28,7 +29,7 @@ public class BasePlayerMovement : MonoBehaviour
     protected bool _isGrounded;
 
     // Script References.
-    [SerializeField] private Player_ClimbingSystem climbingSystemScript; 
+    [SerializeField] private Player_ClimbingSystem climbingSystemScript;
 
     #endregion
 
@@ -40,7 +41,7 @@ public class BasePlayerMovement : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!climbingSystemScript.IsClimbing()) 
+        if (!climbingSystemScript.IsClimbing())
         {
             CheckGroundStatus();
         }
@@ -77,6 +78,21 @@ public class BasePlayerMovement : MonoBehaviour
         _inputDirection = inputDir;
 
         _isRunning = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+
+        if (_inputDirection != Vector3.zero)
+        {
+            Vector3 moveDirection = transform.TransformDirection(_inputDirection);
+            _controller.Move(moveDirection * Time.deltaTime * 4f);
+        }
+    }
+
+    /// <summary>
+    /// Handles player rotation based on input and mouse movement.
+    /// </summary>
+    private void PlayerRotation()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        transform.Rotate(0f, mouseX, 0f);
     }
 
     /// <summary>
@@ -84,22 +100,10 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     private void ApplyGravity()
     {
-        if (!climbingSystemScript.IsClimbing()) 
+        if (!climbingSystemScript.IsClimbing())
         {
             _velocity.y += gravity * Time.deltaTime;
             _controller.Move(_velocity * Time.deltaTime);
-        }
-    }
-
-    /// <summary>
-    /// Handles smooth rotation based on input direction.
-    /// </summary>
-    private void PlayerRotation()
-    {
-        if (_inputDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(_inputDirection);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -110,15 +114,12 @@ public class BasePlayerMovement : MonoBehaviour
     {
         if (hit.collider.gameObject.GetComponent<ClimbableWall>() && Input.GetAxis("Vertical") > 0)
         {
-            Debug.Log("Player can climb");
             climbingSystemScript.StartClimbing();
         }
         else if (!hit.collider.gameObject.GetComponent<ClimbableWall>())
         {
-            Debug.Log("Player will not climb");
             climbingSystemScript.StopClimbing();
         }
-
     }
 
     /// <summary>
