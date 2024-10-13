@@ -4,13 +4,13 @@ public class BasePlayerMovement : MonoBehaviour
 {
     #region Variables
     [Header("Rotation Settings")]
-    public float rotationSpeed = 400f;
-    public float mouseSensitivity = 2.0f; // Sensitivity for mouse rotation
+    [SerializeField] private float rotationSpeed = 50f;
+    [SerializeField] private float mouseSensitivity = 2.0f; 
 
     [Header("Gravity Settings")]
-    public float gravity = -9.81f;
-    public float groundCheckDistance = 0.4f;
-    public LayerMask groundMask;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float groundCheckDistance = 0.4f;
+    [SerializeField] private LayerMask groundMask;
 
     // Animation Parameter Labels.
     protected string _idle = "PlayerNotMoving";
@@ -31,6 +31,8 @@ public class BasePlayerMovement : MonoBehaviour
     // Script References.
     [SerializeField] private Player_ClimbingSystem climbingSystemScript;
 
+    // Const
+    private const float _noValue = 0f;
     #endregion
 
     protected virtual void Start()
@@ -59,7 +61,7 @@ public class BasePlayerMovement : MonoBehaviour
     private void CheckGroundStatus()
     {
         _isGrounded = _controller.isGrounded;
-        if (_isGrounded && _velocity.y < 0)
+        if (_isGrounded && _velocity.y < _noValue)
         {
             _velocity.y = -5f; // Adds force to fake gravity.
         }
@@ -73,7 +75,7 @@ public class BasePlayerMovement : MonoBehaviour
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputZ = Input.GetAxisRaw("Vertical");
 
-        Vector3 inputDir = new Vector3(inputX, 0f, inputZ).normalized;
+        Vector3 inputDir = new Vector3(inputX, _noValue, inputZ).normalized;
 
         _inputDirection = inputDir;
 
@@ -91,8 +93,11 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     private void PlayerRotation()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        transform.Rotate(0f, mouseX, 0f);
+        if (_inputDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_inputDirection);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
     }
 
     /// <summary>
@@ -112,7 +117,7 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.gameObject.GetComponent<ClimbableWall>() && Input.GetAxis("Vertical") > 0)
+        if (hit.collider.gameObject.GetComponent<ClimbableWall>() && Input.GetAxis("Vertical") > _noValue)
         {
             climbingSystemScript.StartClimbing();
         }
