@@ -63,13 +63,8 @@ public class Player_ClimbingSystem : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            verticalInput = 1f; 
+            verticalInput = 1f;
         }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            verticalInput = -1f; 
-        }
-
         if (verticalInput != 0)
         {
             _lastInputTime = Time.time; 
@@ -85,7 +80,17 @@ public class Player_ClimbingSystem : MonoBehaviour
     private bool IsNearClimbableWall()
     {
         RaycastHit hit;
+
         if (Physics.Raycast(transform.position, transform.forward, out hit, wallCheckDistance, climbableLayer))
+        {
+            return true; 
+        }
+        if (Physics.Raycast(transform.position, -transform.right, out hit, wallCheckDistance, climbableLayer))
+        {
+            return true; 
+        }
+
+        if (Physics.Raycast(transform.position, transform.right, out hit, wallCheckDistance, climbableLayer))
         {
             return true; 
         }

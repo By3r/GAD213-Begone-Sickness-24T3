@@ -5,11 +5,9 @@ public class BasePlayerMovement : MonoBehaviour
     #region Variables
     [Header("Rotation Settings")]
     [SerializeField] private float rotationSpeed = 50f;
-    [SerializeField] private float mouseSensitivity = 2.0f; 
 
     [Header("Gravity Settings")]
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float groundCheckDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
 
     // Animation Parameter Labels.
