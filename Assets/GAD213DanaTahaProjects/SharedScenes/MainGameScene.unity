@@ -198,8 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6e8545894aa8e49bca39aa70c92d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
-  gravity: -9.81
+  rotationSpeed: 2
+  moveSpeed: 10
+  gravity: -15
+  groundCheckDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -222,7 +224,14 @@ MonoBehaviour:
   climbableLayer:
     serializedVersion: 2
     m_Bits: 64
-  wallCheckDistance: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  wallCheckDistance: 2
+  sphereCastRadius: 0.5
+  torsoTransform: {fileID: 1043716294}
+  groundCheckDistance: 1.5
+  groundCheckDelay: 3
 --- !u!4 &65252574 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
@@ -241,7 +250,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5d3a0571a92fce6428de3967916e4675, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -364,7 +373,6 @@ GameObject:
   - component: {fileID: 446752926}
   - component: {fileID: 446752925}
   - component: {fileID: 446752924}
-  - component: {fileID: 446752923}
   m_Layer: 6
   m_Name: UpperClimbableWall
   m_TagString: Untagged
@@ -381,24 +389,12 @@ Transform:
   m_GameObject: {fileID: 446752921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.05, y: 6.96, z: 4.22}
-  m_LocalScale: {x: 0.27153572, y: 5.0139093, z: 7.576493}
+  m_LocalPosition: {x: -0.05, y: 6.96, z: 6.43}
+  m_LocalScale: {x: 4.6538506, y: 5.0139093, z: 7.576493}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1465256082}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &446752923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 446752921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a651ff0613e6c4fa3867923c96d70d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &446752924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -759,7 +755,6 @@ GameObject:
   - component: {fileID: 758223130}
   - component: {fileID: 758223129}
   - component: {fileID: 758223128}
-  - component: {fileID: 758223127}
   m_Layer: 6
   m_Name: BorromClimbableWall
   m_TagString: Untagged
@@ -782,18 +777,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1465256082}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &758223127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758223125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a651ff0613e6c4fa3867923c96d70d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &758223128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1066,10 +1049,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 65252574}
-  camOffset: {x: 0, y: 4, z: -15}
-  camRotationSpeed: 100
-  camAutoFocusTime: 3
-  cameraMovementSpeed: 2
+  camOffset: {x: 0, y: 4, z: -30}
+  camRotationSpeed: 140
+  camAutoFocusTime: 1
+  cameraMovementSpeed: 4
+--- !u!4 &1043716294 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6515712193588681746, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
+  m_PrefabInstance: {fileID: 847691314}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1081526283
 GameObject:
   m_ObjectHideFlags: 0

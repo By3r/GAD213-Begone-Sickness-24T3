@@ -4,33 +4,33 @@ public class BasePlayerMovement : MonoBehaviour
 {
     #region Variables
     [Header("Rotation Settings")]
-    [SerializeField] private float rotationSpeed = 10f;
+    public float rotationSpeed = 0.5f;
+    public float moveSpeed = 4f;
 
     [Header("Gravity Settings")]
-    [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private LayerMask groundMask;
+    public float gravity = -9.81f;
+    public float groundCheckDistance = 0.4f;
+    public LayerMask groundMask;
 
-    // Animation Parameter Labels.
+    // Animation Parameter Labels
     protected string _idle = "PlayerNotMoving";
     protected string _run = "PlayerRunning";
 
-    // Animation and controller.
+    // Animation and controller
     protected Animator _animator;
     protected CharacterController _controller;
 
-    // Movement Variables.
+    // Movement Variables
     protected Vector3 _inputDirection = Vector3.zero;
     protected bool _isRunning = false;
 
-    // 'False' gravity Variables.
+    // Gravity and Ground Variables
     protected Vector3 _velocity;
     protected bool _isGrounded;
 
-    // Script References.
+    // Climbing Script Reference
     [SerializeField] private Player_ClimbingSystem climbingSystemScript;
 
-    // Const
-    private const float _noValue = 0f;
     #endregion
 
     protected virtual void Start()
@@ -41,15 +41,15 @@ public class BasePlayerMovement : MonoBehaviour
 
     protected virtual void Update()
     {
+       
         if (!climbingSystemScript.IsClimbing())
         {
-            CheckGroundStatus();
+            CheckGroundStatus(); 
+            HandleMovementInput();
+            ApplyGravity();
         }
 
-        HandleMovementInput();
-        ApplyGravity();
-        PlayerRotation();
-        UpdateAnimatorParameters();
+        UpdateAnimatorParameters(); 
     }
 
     #region Private Functions
@@ -58,10 +58,11 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     private void CheckGroundStatus()
     {
-        _isGrounded = _controller.isGrounded;
-        if (_isGrounded && _velocity.y < _noValue)
+        _isGrounded = Physics.CheckSphere(transform.position + Vector3.down * groundCheckDistance, 0.1f, groundMask);
+
+        if (_isGrounded && _velocity.y < 0)
         {
-            _velocity.y = -5f; // Adds force to fake gravity.
+            _velocity.y = -2f; 
         }
     }
 
@@ -70,58 +71,47 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     protected virtual void HandleMovementInput()
     {
-        float inputX = Input.GetAxisRaw("Horizontal");
+      
+        if (climbingSystemScript.IsClimbing()) return; 
+
         float inputZ = Input.GetAxisRaw("Vertical");
+        bool inputRotateLeft = Input.GetKey(KeyCode.A); 
+        bool inputRotateRight = Input.GetKey(KeyCode.D); 
 
-        Vector3 inputDir = new Vector3(inputX, _noValue, inputZ).normalized;
-
-        _inputDirection = inputDir;
-
-        _isRunning = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-
-        if (_inputDirection != Vector3.zero)
+        if (inputZ != 0f)
         {
-            Vector3 moveDirection = transform.TransformDirection(_inputDirection);
-            _controller.Move(moveDirection * Time.deltaTime * 4f);
+            Vector3 moveDirection = transform.forward * inputZ;
+            _controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+            _isRunning = true;
+        }
+        else
+        {
+            _isRunning = false;
+        }
+
+        if (inputRotateLeft)
+        {
+            _controller.Move(transform.forward * moveSpeed * Time.deltaTime);
+            _isRunning = true;
+            transform.Rotate(0f, -rotationSpeed, 0f); 
+        }
+        else if (inputRotateRight)
+        {
+            _controller.Move(transform.forward * moveSpeed * Time.deltaTime);
+            _isRunning = true;
+            transform.Rotate(0f, rotationSpeed, 0f); 
         }
     }
 
     /// <summary>
-    /// Handles player rotation based on input and mouse movement.
-    /// </summary>
-    private void PlayerRotation()
-    {
-        if (_inputDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(_inputDirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        }
-    }
-
-    /// <summary>
-    /// Applies gravity feel to the player, but only if they are not climbing.
+    /// Applies gravity to the player, but only if they are not grounded.
     /// </summary>
     private void ApplyGravity()
     {
-        if (!climbingSystemScript.IsClimbing())
+        if (!_isGrounded)
         {
             _velocity.y += gravity * Time.deltaTime;
             _controller.Move(_velocity * Time.deltaTime);
-        }
-    }
-
-    ///<summary>
-    /// Checks whether the player touched a climbable wall to climb or not.
-    /// </summary>
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.collider.gameObject.GetComponent<ClimbableWall>() && Input.GetAxis("Vertical") > _noValue)
-        {
-            climbingSystemScript.StartClimbing();
-        }
-        else if (!hit.collider.gameObject.GetComponent<ClimbableWall>())
-        {
-            climbingSystemScript.StopClimbing();
         }
     }
 
@@ -130,10 +120,10 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     protected virtual void UpdateAnimatorParameters()
     {
-        if (_inputDirection != Vector3.zero)
+        if (_isRunning)
         {
             _animator.SetBool(_idle, false);
-            _animator.SetBool(_run, _isRunning);
+            _animator.SetBool(_run, true);
         }
         else
         {

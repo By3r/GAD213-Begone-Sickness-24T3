@@ -11,8 +11,7 @@ public class PlayerFollowingCam : MonoBehaviour
     [SerializeField] private float cameraMovementSpeed = 2f;
 
 
-    private float _lastMovementTime; // last time the mouse have moved by.
-    private bool _isMouseMoving = false;
+    private float _lastMovementTime; 
     private bool _isAutoFocused = false;
     #endregion 
 
@@ -34,33 +33,35 @@ public class PlayerFollowingCam : MonoBehaviour
     private void CamRotationLogic()
     {
         float _mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
 
-        if (Mathf.Abs(_mouseX) > 0.01f)
+        if (Mathf.Abs(_mouseX) > 0.01f || Mathf.Abs(mouseY) > 0.01f)
         {
             _lastMovementTime = Time.time;
             _isAutoFocused = false;
-            _isMouseMoving = true;
             transform.RotateAround(player.position, Vector3.up, _mouseX * camRotationSpeed * Time.deltaTime);
+            float newRotationX = Mathf.Clamp(transform.eulerAngles.x - mouseY * camRotationSpeed * Time.deltaTime, -10, 80);
+            transform.eulerAngles = new Vector3(newRotationX, transform.eulerAngles.y, 0);
         }
-        else { _isMouseMoving = false; }
 
-        Vector3 _camAtPlayerForwardPosition = player.position + camOffset;
+        Vector3 _camAtPlayerForwardPosition = player.position + transform.rotation * camOffset;
         transform.position = Vector3.Lerp(transform.position, _camAtPlayerForwardPosition, cameraMovementSpeed * Time.deltaTime);
-        transform.LookAt(player.position + Vector3.up * camOffset.y);
     }
+
     private IEnumerator AutoFocusCamera()
     {
-
         _isAutoFocused = true;
-        Quaternion _targetRotation = Quaternion.LookRotation(player.forward);
+        Quaternion targetRotation = Quaternion.LookRotation(player.forward); 
 
-        while (Quaternion.Angle(transform.rotation, _targetRotation) > 0.1f && !_isMouseMoving)
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, camAutoFocusTime * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, cameraMovementSpeed * Time.deltaTime); 
             yield return null;
         }
+
         _isAutoFocused = false;
     }
+
     #endregion
 
 
