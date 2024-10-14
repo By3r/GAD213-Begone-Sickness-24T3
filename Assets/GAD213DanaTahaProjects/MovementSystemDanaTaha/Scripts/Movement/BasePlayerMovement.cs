@@ -4,7 +4,7 @@ public class BasePlayerMovement : MonoBehaviour
 {
     #region Variables
     [Header("Rotation Settings")]
-    [SerializeField] private float rotationSpeed = 50f;
+    [SerializeField] private float rotationSpeed = 10f;
 
     [Header("Gravity Settings")]
     [SerializeField] private float gravity = -9.81f;

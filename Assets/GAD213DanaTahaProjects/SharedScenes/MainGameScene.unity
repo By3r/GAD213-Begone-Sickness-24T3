@@ -198,10 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6e8545894aa8e49bca39aa70c92d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 400
-  mouseSensitivity: 2
+  rotationSpeed: 10
   gravity: -9.81
-  groundCheckDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -907,15 +905,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1048,13 +1046,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878955125}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 4.8100004, y: 11.559999, z: -30.101933}
+  m_LocalRotation: {x: 0.2240628, y: -0, z: -0, w: 0.9745747}
+  m_LocalPosition: {x: 4.8100004, y: 15.07, z: -27.31}
   m_LocalScale: {x: 1.7505003, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.896, y: 0, z: 0}
 --- !u!114 &878955129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,7 +1066,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 65252574}
-  distanceFromPlayer: {x: 0, y: 13, z: -30}
+  camOffset: {x: 0, y: 4, z: -15}
+  camRotationSpeed: 100
+  camAutoFocusTime: 3
+  cameraMovementSpeed: 2
 --- !u!1 &1081526283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,7 +1558,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 252016873}
   - {fileID: 672961668}
-  - {fileID: 878955128}
   - {fileID: 1465256082}
   - {fileID: 1492681899}
   - {fileID: 847691314}
+  - {fileID: 878955128}
