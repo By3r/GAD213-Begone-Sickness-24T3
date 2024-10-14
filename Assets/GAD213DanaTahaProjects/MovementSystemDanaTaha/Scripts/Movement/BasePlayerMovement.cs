@@ -84,12 +84,7 @@ public class BasePlayerMovement : MonoBehaviour
 
             _controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
-            if (inputZ < 0f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(-transform.forward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            }
-            else
+            if (inputZ >= 0f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -102,6 +97,7 @@ public class BasePlayerMovement : MonoBehaviour
             _isRunning = false;
         }
     }
+
 
     /// <summary>
     /// Applies gravity to the player, but only if they are not grounded.
