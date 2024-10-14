@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BasePlayerMovement : MonoBehaviour
@@ -5,7 +7,7 @@ public class BasePlayerMovement : MonoBehaviour
     #region Variables
     [Header("Rotation Settings")]
     public float rotationSpeed = 0.5f;
-    public float moveSpeed = 4f;
+    public float moveSpeed = 10f;
 
     [Header("Gravity Settings")]
     public float gravity = -9.81f;
@@ -30,26 +32,24 @@ public class BasePlayerMovement : MonoBehaviour
 
     // Climbing Script Reference
     [SerializeField] private Player_ClimbingSystem climbingSystemScript;
-
     #endregion
 
-    protected virtual void Start()
+    private void Start()
     {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
     }
 
-    protected virtual void Update()
+    private void Update()
     {
-       
         if (!climbingSystemScript.IsClimbing())
         {
-            CheckGroundStatus(); 
+            CheckGroundStatus();
             HandleMovementInput();
             ApplyGravity();
         }
 
-        UpdateAnimatorParameters(); 
+        UpdateAnimatorParameters();
     }
 
     #region Private Functions
@@ -62,44 +62,44 @@ public class BasePlayerMovement : MonoBehaviour
 
         if (_isGrounded && _velocity.y < 0)
         {
-            _velocity.y = -2f; 
+            _velocity.y = -2f;
         }
     }
 
     /// <summary>
     /// Handles player input for movement.
     /// </summary>
-    protected virtual void HandleMovementInput()
+    private void HandleMovementInput()
     {
-      
-        if (climbingSystemScript.IsClimbing()) return; 
+        if (climbingSystemScript.IsClimbing()) return;
 
         float inputZ = Input.GetAxisRaw("Vertical");
-        bool inputRotateLeft = Input.GetKey(KeyCode.A); 
-        bool inputRotateRight = Input.GetKey(KeyCode.D); 
+        float inputX = Input.GetAxisRaw("Horizontal");
 
-        if (inputZ != 0f)
+        Vector3 moveDirection = new Vector3(inputX, 0f, inputZ);
+
+        if (moveDirection.magnitude > 0.1f)
         {
-            Vector3 moveDirection = transform.forward * inputZ;
+            moveDirection = transform.TransformDirection(moveDirection);
+
             _controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+
+            if (inputZ < 0f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(-transform.forward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+            else
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+
             _isRunning = true;
         }
         else
         {
             _isRunning = false;
-        }
-
-        if (inputRotateLeft)
-        {
-            _controller.Move(transform.forward * moveSpeed * Time.deltaTime);
-            _isRunning = true;
-            transform.Rotate(0f, -rotationSpeed, 0f); 
-        }
-        else if (inputRotateRight)
-        {
-            _controller.Move(transform.forward * moveSpeed * Time.deltaTime);
-            _isRunning = true;
-            transform.Rotate(0f, rotationSpeed, 0f); 
         }
     }
 
@@ -118,7 +118,7 @@ public class BasePlayerMovement : MonoBehaviour
     /// <summary>
     /// Updates Animator parameters based on movement.
     /// </summary>
-    protected virtual void UpdateAnimatorParameters()
+    private void UpdateAnimatorParameters()
     {
         if (_isRunning)
         {

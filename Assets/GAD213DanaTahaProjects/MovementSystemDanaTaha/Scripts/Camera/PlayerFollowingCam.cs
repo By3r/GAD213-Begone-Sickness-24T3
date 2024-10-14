@@ -5,31 +5,50 @@ public class PlayerFollowingCam : MonoBehaviour
 {
     #region Variables.
     [SerializeField] private Transform player;
-    [SerializeField] private Vector3 camOffset = new Vector3(0, 2, -15);
+    [SerializeField] private Vector3 camOffset = new Vector3(0, 2, -10);
     [SerializeField] private float camRotationSpeed = 10f;
     [SerializeField] private float camAutoFocusTime = 3f;
     [SerializeField] private float cameraMovementSpeed = 2f;
+    [SerializeField] private float zoomSpeed = 2f; 
+    [SerializeField] private float minZoomDistance = 5f; 
+    [SerializeField] private float maxZoomDistance = 30f;
+    [SerializeField] private LayerMask groundLayer; 
 
-
-    private float _lastMovementTime; 
+    private float _lastMovementTime;
     private bool _isAutoFocused = false;
+    private Vector3 _targetOffset; 
     #endregion 
 
     private void Start()
     {
         _lastMovementTime = Time.time;
+        _targetOffset = camOffset;
     }
+
     private void Update()
     {
+        HandleZoomInput();
         CamRotationLogic();
 
-        if (Time.time - _lastMovementTime > camAutoFocusTime && !_isAutoFocused)
-        {
-            StartCoroutine(AutoFocusCamera());
-        }
+        //if (Time.time - _lastMovementTime > camAutoFocusTime && !_isAutoFocused)
+        //{
+        //    StartCoroutine(AutoFocusCamera());
+        //}
     }
 
     #region Private Functions.
+
+    private void HandleZoomInput()
+    {
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scrollInput != 0)
+        {
+            float zoomChange = scrollInput * zoomSpeed;
+            _targetOffset.z = Mathf.Clamp(_targetOffset.z + zoomChange, -maxZoomDistance, -minZoomDistance);
+        }
+    }
+
     private void CamRotationLogic()
     {
         float _mouseX = Input.GetAxis("Mouse X");
@@ -40,29 +59,39 @@ public class PlayerFollowingCam : MonoBehaviour
             _lastMovementTime = Time.time;
             _isAutoFocused = false;
             transform.RotateAround(player.position, Vector3.up, _mouseX * camRotationSpeed * Time.deltaTime);
-            float newRotationX = Mathf.Clamp(transform.eulerAngles.x - mouseY * camRotationSpeed * Time.deltaTime, -10, 80);
-            transform.eulerAngles = new Vector3(newRotationX, transform.eulerAngles.y, 0);
+            Vector3 currentEulerAngles = transform.eulerAngles;
+            float pitch = currentEulerAngles.x - mouseY * camRotationSpeed * Time.deltaTime;
+            pitch = Mathf.Clamp(pitch, 10, 80); 
+            transform.rotation = Quaternion.Euler(pitch, transform.eulerAngles.y, 0f);
         }
 
-        Vector3 _camAtPlayerForwardPosition = player.position + transform.rotation * camOffset;
-        transform.position = Vector3.Lerp(transform.position, _camAtPlayerForwardPosition, cameraMovementSpeed * Time.deltaTime);
-    }
-
-    private IEnumerator AutoFocusCamera()
-    {
-        _isAutoFocused = true;
-        Quaternion targetRotation = Quaternion.LookRotation(player.forward); 
-
-        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Abs(_targetOffset.y), groundLayer))
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, cameraMovementSpeed * Time.deltaTime); 
-            yield return null;
+            _targetOffset.y = Mathf.Lerp(_targetOffset.y, 2f, Time.deltaTime * cameraMovementSpeed);
+        }
+        else
+        {
+            _targetOffset.y = Mathf.Lerp(_targetOffset.y, camOffset.y, Time.deltaTime * cameraMovementSpeed);
         }
 
-        _isAutoFocused = false;
+        Vector3 camAtPlayerForwardPosition = player.position + transform.rotation * _targetOffset;
+        transform.position = Vector3.Lerp(transform.position, camAtPlayerForwardPosition, cameraMovementSpeed * Time.deltaTime);
     }
+
+    //private IEnumerator AutoFocusCamera()
+    //{
+    //    _isAutoFocused = true;
+    //    Quaternion targetRotation = Quaternion.LookRotation(player.forward);
+
+    //    while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+    //    {
+    //        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, cameraMovementSpeed * Time.deltaTime);
+    //        yield return null;
+    //    }
+
+    //    _isAutoFocused = false;
+    //}
 
     #endregion
-
-
 }
