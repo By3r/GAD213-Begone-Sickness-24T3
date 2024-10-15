@@ -23,15 +23,18 @@ public class BasePlayerMovement : MonoBehaviour
     protected CharacterController _controller;
 
     // Movement Variables
-    protected Vector3 _inputDirection = Vector3.zero;
-    protected bool _isRunning = false;
+    private Vector3 _inputDirection = Vector3.zero;
+    private bool _isRunning = false;
 
     // Gravity and Ground Variables
-    protected Vector3 _velocity;
-    protected bool _isGrounded;
+    private Vector3 _velocity;
+    private bool _isGrounded;
 
     // Climbing Script Reference
     [SerializeField] private Player_ClimbingSystem climbingSystemScript;
+
+    // Camera Reference
+    [SerializeField] private Transform cameraTransform;
     #endregion
 
     private void Start()
@@ -48,6 +51,7 @@ public class BasePlayerMovement : MonoBehaviour
             ApplyGravity();
         }
     }
+
     private void Update()
     {
         if (!climbingSystemScript.IsClimbing())
@@ -55,7 +59,6 @@ public class BasePlayerMovement : MonoBehaviour
             HandleMovementInput();
         }
         UpdateAnimatorParameters();
-
     }
 
     #region Private Functions
@@ -77,36 +80,34 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     private void HandleMovementInput()
     {
-        float inputZ = Input.GetAxis("Vertical");
         float inputX = Input.GetAxis("Horizontal");
+        float inputZ = Input.GetAxis("Vertical");
 
-        Vector3 _moveDirection = new Vector3(inputX, 0f, inputZ);
-        _moveDirection.Normalize();
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
 
-        if (_moveDirection.magnitude > 0.1f)
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = forward * inputZ + right * inputX;
+
+        if (moveDirection.magnitude > 0.1f)
         {
-            Vector3 _FaceDirection = transform.TransformDirection(_moveDirection);
-
-            float speedMultiplier = inputZ < 0 ? 0.5f : 1f;
-
-            _controller.Move(_FaceDirection * moveSpeed * speedMultiplier * Time.deltaTime);
-
-
-            if (inputZ > 0 || inputX != 0)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(_FaceDirection, Vector3.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            }
             _isRunning = true;
+
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            _controller.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
         else
         {
             _isRunning = false;
         }
     }
-
-
-
 
     /// <summary>
     /// Applies gravity to the player, but only if they are not grounded.

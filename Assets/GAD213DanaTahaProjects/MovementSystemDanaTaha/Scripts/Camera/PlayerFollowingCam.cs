@@ -7,21 +7,17 @@ public class PlayerFollowingCam : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Vector3 camOffset = new Vector3(0, 2, -10);
     [SerializeField] private float camRotationSpeed = 10f;
-    [SerializeField] private float camAutoFocusTime = 3f;
     [SerializeField] private float cameraMovementSpeed = 2f;
     [SerializeField] private float zoomSpeed = 2f; 
     [SerializeField] private float minZoomDistance = 5f; 
     [SerializeField] private float maxZoomDistance = 30f;
     [SerializeField] private LayerMask groundLayer; 
 
-    private float _lastMovementTime;
-    private bool _isAutoFocused = false;
-    private Vector3 _targetOffset; 
-    #endregion 
+    private Vector3 _targetOffset;
+    #endregion
 
     private void Start()
     {
-        _lastMovementTime = Time.time;
         _targetOffset = camOffset;
     }
 
@@ -29,11 +25,6 @@ public class PlayerFollowingCam : MonoBehaviour
     {
         HandleZoomInput();
         CamRotationLogic();
-
-        //if (Time.time - _lastMovementTime > camAutoFocusTime && !_isAutoFocused)
-        //{
-        //    StartCoroutine(AutoFocusCamera());
-        //}
     }
 
     #region Private Functions.
@@ -56,42 +47,18 @@ public class PlayerFollowingCam : MonoBehaviour
 
         if (Mathf.Abs(_mouseX) > 0.01f || Mathf.Abs(mouseY) > 0.01f)
         {
-            _lastMovementTime = Time.time;
-            _isAutoFocused = false;
             transform.RotateAround(player.position, Vector3.up, _mouseX * camRotationSpeed * Time.deltaTime);
             Vector3 currentEulerAngles = transform.eulerAngles;
             float pitch = currentEulerAngles.x - mouseY * camRotationSpeed * Time.deltaTime;
-            pitch = Mathf.Clamp(pitch, 10, 80); 
+            pitch = Mathf.Clamp(pitch, 5, 80); 
             transform.rotation = Quaternion.Euler(pitch, transform.eulerAngles.y, 0f);
         }
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Abs(_targetOffset.y), groundLayer))
-        {
-            _targetOffset.y = Mathf.Lerp(_targetOffset.y, 2f, Time.deltaTime * cameraMovementSpeed);
-        }
-        else
-        {
-            _targetOffset.y = Mathf.Lerp(_targetOffset.y, camOffset.y, Time.deltaTime * cameraMovementSpeed);
-        }
+        _targetOffset.y = Mathf.Lerp(_targetOffset.y, camOffset.y, Time.deltaTime * cameraMovementSpeed);
 
         Vector3 camAtPlayerForwardPosition = player.position + transform.rotation * _targetOffset;
         transform.position = Vector3.Lerp(transform.position, camAtPlayerForwardPosition, cameraMovementSpeed * Time.deltaTime);
     }
-
-    //private IEnumerator AutoFocusCamera()
-    //{
-    //    _isAutoFocused = true;
-    //    Quaternion targetRotation = Quaternion.LookRotation(player.forward);
-
-    //    while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
-    //    {
-    //        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, cameraMovementSpeed * Time.deltaTime);
-    //        yield return null;
-    //    }
-
-    //    _isAutoFocused = false;
-    //}
 
     #endregion
 }
