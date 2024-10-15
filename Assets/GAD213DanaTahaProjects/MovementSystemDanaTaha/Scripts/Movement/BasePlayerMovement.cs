@@ -44,14 +44,18 @@ public class BasePlayerMovement : MonoBehaviour
     {
         if (!climbingSystemScript.IsClimbing())
         {
-            HandleMovementInput();
             CheckGroundStatus();
             ApplyGravity();
         }
     }
     private void Update()
     {
+        if (!climbingSystemScript.IsClimbing())
+        {
+            HandleMovementInput();
+        }
         UpdateAnimatorParameters();
+
     }
 
     #region Private Functions
@@ -73,8 +77,6 @@ public class BasePlayerMovement : MonoBehaviour
     /// </summary>
     private void HandleMovementInput()
     {
-        if (climbingSystemScript.IsClimbing()) return;
-
         float inputZ = Input.GetAxis("Vertical");
         float inputX = Input.GetAxis("Horizontal");
 
@@ -85,14 +87,16 @@ public class BasePlayerMovement : MonoBehaviour
         {
             Vector3 _FaceDirection = transform.TransformDirection(_moveDirection);
 
-            _controller.Move(_FaceDirection * moveSpeed * Time.deltaTime);
+            float speedMultiplier = inputZ < 0 ? 0.5f : 1f;
 
-            if (_FaceDirection != Vector3.zero)
+            _controller.Move(_FaceDirection * moveSpeed * speedMultiplier * Time.deltaTime);
+
+
+            if (inputZ > 0 || inputX != 0)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(_FaceDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
-
             _isRunning = true;
         }
         else
@@ -100,6 +104,8 @@ public class BasePlayerMovement : MonoBehaviour
             _isRunning = false;
         }
     }
+
+
 
 
     /// <summary>
@@ -111,6 +117,10 @@ public class BasePlayerMovement : MonoBehaviour
         {
             _velocity.y += gravity * Time.deltaTime;
             _controller.Move(_velocity * Time.deltaTime);
+        }
+        else
+        {
+            _velocity.y = -2f;
         }
     }
 

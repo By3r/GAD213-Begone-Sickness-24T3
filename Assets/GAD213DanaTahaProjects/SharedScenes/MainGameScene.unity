@@ -269,10 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6e8545894aa8e49bca39aa70c92d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
+  rotationSpeed: 6
   moveSpeed: 10
-  gravity: -50
-  groundCheckDistance: 0.4
+  gravity: -80
+  groundCheckDistance: 0.3
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -301,7 +301,7 @@ MonoBehaviour:
   wallCheckDistance: 0.5
   sphereCastRadius: 0.5
   torsoTransform: {fileID: 1043716294}
-  groundCheckDistance: 1
+  groundCheckDistance: 0.3
   groundCheckDelay: 3
 --- !u!4 &65252574 stripped
 Transform:
