@@ -40,15 +40,17 @@ public class BasePlayerMovement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!climbingSystemScript.IsClimbing())
         {
-            CheckGroundStatus();
             HandleMovementInput();
+            CheckGroundStatus();
             ApplyGravity();
         }
-
+    }
+    private void Update()
+    {
         UpdateAnimatorParameters();
     }
 
@@ -73,20 +75,21 @@ public class BasePlayerMovement : MonoBehaviour
     {
         if (climbingSystemScript.IsClimbing()) return;
 
-        float inputZ = Input.GetAxisRaw("Vertical");
-        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputZ = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxis("Horizontal");
 
-        Vector3 moveDirection = new Vector3(inputX, 0f, inputZ);
+        Vector3 _moveDirection = new Vector3(inputX, 0f, inputZ);
+        _moveDirection.Normalize();
 
-        if (moveDirection.magnitude > 0.1f)
+        if (_moveDirection.magnitude > 0.1f)
         {
-            moveDirection = transform.TransformDirection(moveDirection);
+            Vector3 _FaceDirection = transform.TransformDirection(_moveDirection);
 
-            _controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+            _controller.Move(_FaceDirection * moveSpeed * Time.deltaTime);
 
-            if (inputZ >= 0f)
+            if (_FaceDirection != Vector3.zero)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                Quaternion targetRotation = Quaternion.LookRotation(_FaceDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
 
