@@ -1,20 +1,34 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_ClimbingSystem : MonoBehaviour
 {
     #region Variables
 
+    [Header("Climbing Settings")]
     [SerializeField] private float climbingSpeed = 5f;
     [SerializeField] private bool isClimbing = false;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private Transform torsoTransform;
+    [SerializeField] private float groundCheckDistance = 1f;
+    [SerializeField] private float groundCheckDelay = 4f;
+
+    [Header("Spherecast vars")]
     [SerializeField] private LayerMask climbableLayer;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float wallCheckDistance = 1f;
     [SerializeField] private float sphereCastRadius = 0.5f;
-    [SerializeField] private Transform torsoTransform;
-    [SerializeField] private float groundCheckDistance = 1f;
-    [SerializeField] private float groundCheckDelay = 4f;
+
+
+    [Header("Stamina Settings")]
+    [SerializeField] private float maxStamina = 60f;
+    [SerializeField] private float staminaDrainRate = 10f;
+    [SerializeField] private float staminaRegenRate = 5f;
+    private float currentStamina;
+
+    [Header("UI")]
+    [SerializeField] private Slider staminaBar;
 
     private Vector3 _wallNormal;
     private Animator _animator;
@@ -26,11 +40,17 @@ public class Player_ClimbingSystem : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        currentStamina = maxStamina;
+
+        if (staminaBar != null)
+        {
+            staminaBar.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
-        if (IsNearClimbableWallFromTorso() && !isClimbing)
+        if (IsNearClimbableWallFromTorso() && !isClimbing && currentStamina > 0)
         {
             StartClimbing();
         }
@@ -39,10 +59,16 @@ public class Player_ClimbingSystem : MonoBehaviour
         {
             ClimbingMovementLogic();
 
-            if (!IsNearClimbableWallFromTorso() && IsNearClimbableWallFromFeet())
+            if (staminaBar != null)
             {
+                staminaBar.value = currentStamina / maxStamina;
             }
-            else if (!IsNearClimbableWallFromFeet())
+
+            if (currentStamina <= 0)
+            {
+                StopClimbing();
+            }
+            if (!IsNearClimbableWallFromFeet())
             {
                 StopClimbing();
             }
@@ -50,6 +76,14 @@ public class Player_ClimbingSystem : MonoBehaviour
             if (_groundCheckActive && IsNearGround())
             {
                 StopClimbing();
+            }
+        }
+        else
+        {
+            if (currentStamina < maxStamina)
+            {
+                currentStamina += staminaRegenRate * Time.deltaTime;
+                currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
             }
         }
 
@@ -61,10 +95,17 @@ public class Player_ClimbingSystem : MonoBehaviour
     }
 
     #region Public Functions
+
     public void StartClimbing()
     {
         isClimbing = true;
         _animator.SetBool("PlayerClimbing", true);
+
+        if (staminaBar != null)
+        {
+            staminaBar.gameObject.SetActive(true);
+        }
+
         StartCoroutine(DelayedGroundCheck());
     }
 
@@ -73,6 +114,11 @@ public class Player_ClimbingSystem : MonoBehaviour
         isClimbing = false;
         _groundCheckActive = false;
         _animator.SetBool("PlayerClimbing", false);
+
+        if (staminaBar != null)
+        {
+            staminaBar.gameObject.SetActive(false);
+        }
     }
 
     public bool IsClimbing()
@@ -100,6 +146,8 @@ public class Player_ClimbingSystem : MonoBehaviour
         if (verticalInput != 0 || horizontalInput != 0)
         {
             _animator.speed = 1f;
+            currentStamina -= staminaDrainRate * Time.deltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
         }
         else
         {

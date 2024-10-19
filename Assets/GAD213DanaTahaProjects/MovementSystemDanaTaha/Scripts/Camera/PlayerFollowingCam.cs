@@ -4,14 +4,20 @@ using UnityEngine;
 public class PlayerFollowingCam : MonoBehaviour
 {
     #region Variables.
+    [Header("Camera Speed Settings")]
+    [SerializeField] private float camRotationSpeed = 140f;
+    [SerializeField] private float cameraMovementSpeed = 8f;
+    [SerializeField] private float zoomSpeed = 4f;
+
+    [Header("Camera Zoom settings")]
+    [SerializeField] private float _minZoomDistance = 5f;
+    [SerializeField] private float _maxZoomDistance = 30f;
+
+    [Header("Player, offset and ground")]
     [SerializeField] private Transform player;
     [SerializeField] private Vector3 camOffset = new Vector3(0, 2, -10);
-    [SerializeField] private float camRotationSpeed = 12f;
-    [SerializeField] private float cameraMovementSpeed = 4f;
-    [SerializeField] private float zoomSpeed = 2f;
+    [SerializeField] private LayerMask groundLayer;
 
-    private float _minZoomDistance = 5f;
-    private float _maxZoomDistance = 30f;
     private Vector3 _targetOffset;
     #endregion
 
@@ -58,6 +64,5 @@ public class PlayerFollowingCam : MonoBehaviour
         Vector3 camAtPlayerForwardPosition = player.position + transform.rotation * _targetOffset;
         transform.position = Vector3.Lerp(transform.position, camAtPlayerForwardPosition, cameraMovementSpeed * Time.deltaTime);
     }
-  
+    #endregion
 }
-#endregion

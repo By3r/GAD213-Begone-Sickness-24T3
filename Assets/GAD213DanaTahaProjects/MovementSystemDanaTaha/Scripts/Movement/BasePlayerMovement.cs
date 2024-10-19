@@ -18,7 +18,7 @@ public class BasePlayerMovement : MonoBehaviour
     protected string _idle = "PlayerNotMoving";
     protected string _run = "PlayerRunning";
 
-    // Animation and controller
+    // Animator and controller
     protected Animator _animator;
     protected CharacterController _controller;
 
