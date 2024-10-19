@@ -55,7 +55,7 @@ public class Player_ClimbingSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G) && isClimbing)
         {
-            CancelTheClimb();
+            StopClimbing();
             _animator.SetBool("PlayerClimbing", false);
         }
     }
@@ -171,9 +171,5 @@ public class Player_ClimbingSystem : MonoBehaviour
         }
     }
 
-    private void CancelTheClimb()
-    {
-        StopClimbing();
-    }
     #endregion
 }

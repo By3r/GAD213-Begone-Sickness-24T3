@@ -6,13 +6,12 @@ public class PlayerFollowingCam : MonoBehaviour
     #region Variables.
     [SerializeField] private Transform player;
     [SerializeField] private Vector3 camOffset = new Vector3(0, 2, -10);
-    [SerializeField] private float camRotationSpeed = 10f;
-    [SerializeField] private float cameraMovementSpeed = 2f;
-    [SerializeField] private float zoomSpeed = 2f; 
-    [SerializeField] private float minZoomDistance = 5f; 
-    [SerializeField] private float maxZoomDistance = 30f;
-    [SerializeField] private LayerMask groundLayer; 
+    [SerializeField] private float camRotationSpeed = 12f;
+    [SerializeField] private float cameraMovementSpeed = 4f;
+    [SerializeField] private float zoomSpeed = 2f;
 
+    private float _minZoomDistance = 5f;
+    private float _maxZoomDistance = 30f;
     private Vector3 _targetOffset;
     #endregion
 
@@ -36,7 +35,7 @@ public class PlayerFollowingCam : MonoBehaviour
         if (scrollInput != 0)
         {
             float zoomChange = scrollInput * zoomSpeed;
-            _targetOffset.z = Mathf.Clamp(_targetOffset.z + zoomChange, -maxZoomDistance, -minZoomDistance);
+            _targetOffset.z = Mathf.Clamp(_targetOffset.z + zoomChange, -_maxZoomDistance, -_minZoomDistance);
         }
     }
 
@@ -50,7 +49,7 @@ public class PlayerFollowingCam : MonoBehaviour
             transform.RotateAround(player.position, Vector3.up, _mouseX * camRotationSpeed * Time.deltaTime);
             Vector3 currentEulerAngles = transform.eulerAngles;
             float pitch = currentEulerAngles.x - mouseY * camRotationSpeed * Time.deltaTime;
-            pitch = Mathf.Clamp(pitch, 5, 80); 
+            pitch = Mathf.Clamp(pitch, 5, 80);
             transform.rotation = Quaternion.Euler(pitch, transform.eulerAngles.y, 0f);
         }
 
@@ -59,6 +58,6 @@ public class PlayerFollowingCam : MonoBehaviour
         Vector3 camAtPlayerForwardPosition = player.position + transform.rotation * _targetOffset;
         transform.position = Vector3.Lerp(transform.position, camAtPlayerForwardPosition, cameraMovementSpeed * Time.deltaTime);
     }
-
-    #endregion
+  
 }
+#endregion
