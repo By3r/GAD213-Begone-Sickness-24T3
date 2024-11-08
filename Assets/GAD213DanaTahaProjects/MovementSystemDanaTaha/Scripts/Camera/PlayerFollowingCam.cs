@@ -1,68 +1,54 @@
-using System.Collections;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerFollowingCam : MonoBehaviour
 {
     #region Variables.
     [Header("Camera Speed Settings")]
-    [SerializeField] private float camRotationSpeed = 140f;
-    [SerializeField] private float cameraMovementSpeed = 8f;
     [SerializeField] private float zoomSpeed = 4f;
 
+    [Header("Cinemachine Reference")]
+    [SerializeField] private CinemachineFreeLook freeLookCamera;
+
     [Header("Camera Zoom settings")]
-    [SerializeField] private float _minZoomDistance = 5f;
-    [SerializeField] private float _maxZoomDistance = 30f;
+    [SerializeField] private float minZoomFOV = 30f;
+    [SerializeField] private float maxZoomFOV = 70f;
 
-    [Header("Player, offset and ground")]
-    [SerializeField] private Transform player;
-    [SerializeField] private Vector3 camOffset = new Vector3(0, 2, -10);
-    [SerializeField] private LayerMask groundLayer;
-
-    private Vector3 _targetOffset;
+    private float targetFOV;
     #endregion
 
     private void Start()
     {
-        _targetOffset = camOffset;
+        if (freeLookCamera == null)
+        {
+            Debug.LogError("no cinemach found.");
+            enabled = false;
+            return;
+        }
+        targetFOV = freeLookCamera.m_Lens.FieldOfView;
     }
 
     private void Update()
     {
         HandleZoomInput();
-        CamRotationLogic();
     }
 
-    #region Private Functions.
+    #region Private Functions
 
+    /// <summary>
+    /// Handles zoom input using the mouse scroll wheel.
+    /// </summary>
     private void HandleZoomInput()
     {
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-        if (scrollInput != 0)
+        if (Mathf.Abs(scrollInput) > 0.01f)
         {
-            float zoomChange = scrollInput * zoomSpeed;
-            _targetOffset.z = Mathf.Clamp(_targetOffset.z + zoomChange, -_maxZoomDistance, -_minZoomDistance);
+            targetFOV -= scrollInput * zoomSpeed;
+            targetFOV = Mathf.Clamp(targetFOV, minZoomFOV, maxZoomFOV);
+            freeLookCamera.m_Lens.FieldOfView = targetFOV;
         }
     }
 
-    private void CamRotationLogic()
-    {
-        float _mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
-        if (Mathf.Abs(_mouseX) > 0.01f || Mathf.Abs(mouseY) > 0.01f)
-        {
-            transform.RotateAround(player.position, Vector3.up, _mouseX * camRotationSpeed * Time.deltaTime);
-            Vector3 currentEulerAngles = transform.eulerAngles;
-            float pitch = currentEulerAngles.x - mouseY * camRotationSpeed * Time.deltaTime;
-            pitch = Mathf.Clamp(pitch, 5, 80);
-            transform.rotation = Quaternion.Euler(pitch, transform.eulerAngles.y, 0f);
-        }
-
-        _targetOffset.y = Mathf.Lerp(_targetOffset.y, camOffset.y, Time.deltaTime * cameraMovementSpeed);
-
-        Vector3 camAtPlayerForwardPosition = player.position + transform.rotation * _targetOffset;
-        transform.position = Vector3.Lerp(transform.position, camAtPlayerForwardPosition, cameraMovementSpeed * Time.deltaTime);
-    }
     #endregion
 }
