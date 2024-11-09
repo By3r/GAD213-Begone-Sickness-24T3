@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerData
 {
     public string selectedMaterialName;
+    public string playerMainMenuMaterialName;
 }
 #endregion
-
 
 public static class CharacterSave
 {
@@ -18,7 +18,7 @@ public static class CharacterSave
     {
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(savePath, json);
-        Debug.Log("Data within: " + savePath);
+        // Debug.Log("Data saved to: " + savePath);
     }
 
     public static PlayerData LoadData()
@@ -27,12 +27,12 @@ public static class CharacterSave
         {
             string json = File.ReadAllText(savePath);
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-            Debug.Log("Data came from: " + savePath);
+            // Debug.Log("Data loaded from: " + savePath);
             return data;
         }
         else
         {
-            Debug.LogWarning("There is no saved file. Going back to initial material.");
+            // Debug.LogWarning("No saved file found. Using default materials.");
             return null;
         }
     }

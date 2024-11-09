@@ -6,7 +6,8 @@ public class CharacterRotationLogic : MonoBehaviour
 {
     #region Variables.
     public CharacterSelectionMenu menu;
-    public Material characterMaterial;
+    public Material characterMaterial;               
+    public Material mainMenuMaterial;                
     public float rotationSpeed = 20f;
     public Camera mMCharacterSelectionCamera;
 
@@ -36,8 +37,8 @@ public class CharacterRotationLogic : MonoBehaviour
                 _isHovering = true;
                 if (Input.GetMouseButtonDown(0))
                 {
-                    menu.SetCurrentSelectedMaterial(characterMaterial);
-                    Debug.Log("You Selected: " + characterMaterial.name);
+                    menu.SetCurrentSelectedMaterials(characterMaterial, mainMenuMaterial);
+                    // Debug.Log("You Selected: " + characterMaterial.name);
                 }
             }
             else

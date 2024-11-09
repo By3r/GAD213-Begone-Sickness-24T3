@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CharacterSelectionMenu : MonoBehaviour
 {
-    #region Variables.
+    #region Variables
     public GameObject mainMenu;
     public GameObject characterSelectionMenu;
-    public GameObject player;
+    public GameObject mainMenuPlayer;  
     public Material[] characterMaterials;
     public MainMenuCameraSwitcher cameraSwitcher;
 
@@ -16,11 +16,11 @@ public class CharacterSelectionMenu : MonoBehaviour
 
     private void Start()
     {
-        LoadSelectedCharacter();
+        LoadSelectedCharacter(); 
         ShowMainMenu();
     }
 
-    #region Public Functions.
+    #region Public Functions
     public void ToggleCharacterSelectionMenu()
     {
         if (characterSelectionMenu.activeSelf)
@@ -32,11 +32,16 @@ public class CharacterSelectionMenu : MonoBehaviour
             ShowCharacterSelectionMenu();
         }
     }
+
     public void SaveSelectedCharacter(Material selectedMaterial)
     {
-        PlayerData data = new PlayerData { selectedMaterialName = selectedMaterial.name };
+        PlayerData data = new PlayerData
+        {
+            selectedMaterialName = selectedMaterial.name,           
+            playerMainMenuMaterialName = selectedMaterial.name    
+        };
         CharacterSave.SaveData(data);
-        ApplyMaterialToPlayer(selectedMaterial);
+        ApplyMaterialToMainMenuPlayer(selectedMaterial);         
     }
 
     public void LoadSelectedCharacter()
@@ -44,27 +49,40 @@ public class CharacterSelectionMenu : MonoBehaviour
         PlayerData data = CharacterSave.LoadData();
         if (data != null)
         {
-            Material loadedMaterial = GetMaterialName(data.selectedMaterialName);
-            if (loadedMaterial != null)
+            Material mainMenuMaterial = GetMaterialByName(data.playerMainMenuMaterialName);
+            if (mainMenuMaterial != null)
             {
-                ApplyMaterialToPlayer(loadedMaterial);
+                ApplyMaterialToMainMenuPlayer(mainMenuMaterial);  
             }
         }
         else
         {
-            ApplyMaterialToPlayer(characterMaterials[0]);
+            ApplyMaterialToMainMenuPlayer(characterMaterials[0]);
         }
+    }
+
+    public void SetCurrentSelectedMaterials(Material inGameMaterial, Material mainMenuMaterial)
+    {
+        _currentSelectedMaterial = inGameMaterial;
+
+        PlayerData data = new PlayerData
+        {
+            selectedMaterialName = inGameMaterial.name,
+            playerMainMenuMaterialName = mainMenuMaterial.name
+        };
+
+        CharacterSave.SaveData(data);
+        ApplyMaterialToMainMenuPlayer(mainMenuMaterial);          
     }
 
     public void SetCurrentSelectedMaterial(Material selectedMaterial)
     {
         _currentSelectedMaterial = selectedMaterial;
-        SaveSelectedCharacter(selectedMaterial);
+        SaveSelectedCharacter(selectedMaterial);                   
     }
     #endregion
 
-
-    #region Private Regions.
+    #region Private Functions
     private void ShowMainMenu()
     {
         mainMenu.SetActive(true);
@@ -79,9 +97,7 @@ public class CharacterSelectionMenu : MonoBehaviour
         cameraSwitcher.ShowCharacterSelectionCamera();
     }
 
-
-
-    private Material GetMaterialName(string materialName)
+    private Material GetMaterialByName(string materialName)
     {
         foreach (Material mat in characterMaterials)
         {
@@ -93,9 +109,9 @@ public class CharacterSelectionMenu : MonoBehaviour
         return null;
     }
 
-    private void ApplyMaterialToPlayer(Material material)
+    private void ApplyMaterialToMainMenuPlayer(Material material)
     {
-        if (player.TryGetComponent<Renderer>(out Renderer renderer))
+        if (mainMenuPlayer.TryGetComponent<Renderer>(out Renderer renderer))
         {
             renderer.material = material;
         }
