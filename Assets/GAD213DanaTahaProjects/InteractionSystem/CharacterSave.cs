@@ -7,6 +7,9 @@ public class PlayerData
 {
     public string selectedMaterialName;
     public string playerMainMenuMaterialName;
+    public float positionX;
+    public float positionY;
+    public float positionZ;
 }
 #endregion
 
