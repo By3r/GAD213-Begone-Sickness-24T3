@@ -411,8 +411,9 @@ MonoBehaviour:
   menu: {fileID: 1722629265}
   characterMaterial: {fileID: 2100000, guid: b06b32f14b71c764bbc9486b42769dc8, type: 2}
   mainMenuMaterial: {fileID: 2100000, guid: b6e7966112dde9641b15974eb9be5d55, type: 2}
-  rotationSpeed: 80
   mMCharacterSelectionCamera: {fileID: 960109186}
+  mainMenuPanel: {fileID: 621963120}
+  rotationSpeed: 80
 --- !u!65 &210270877
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -572,8 +573,9 @@ MonoBehaviour:
   menu: {fileID: 1722629265}
   characterMaterial: {fileID: 2100000, guid: 97587a25a62261a4a8e8fc5ef57971f9, type: 2}
   mainMenuMaterial: {fileID: 2100000, guid: d279bb808b22b194aa00afd47722c115, type: 2}
-  rotationSpeed: 80
   mMCharacterSelectionCamera: {fileID: 960109186}
+  mainMenuPanel: {fileID: 621963120}
+  rotationSpeed: 80
 --- !u!65 &367907884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1427,6 +1429,8 @@ GameObject:
   - component: {fileID: 799928870}
   - component: {fileID: 799928869}
   - component: {fileID: 799928868}
+  - component: {fileID: 799928872}
+  - component: {fileID: 799928871}
   m_Layer: 5
   m_Name: ExitCreditsButton
   m_TagString: Untagged
@@ -1498,33 +1502,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1722629266}
-        m_TargetAssemblyTypeName: MainMenuCameraSwitcher, Assembly-CSharp
-        m_MethodName: ShowMainCamera
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1722629265}
-        m_TargetAssemblyTypeName: CharacterSelectionMenu, Assembly-CSharp
-        m_MethodName: LoadSelectedCharacter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1722629265}
-        m_TargetAssemblyTypeName: CharacterSelectionMenu, Assembly-CSharp
-        m_MethodName: ToggleCharacterSelectionMenu
+      - m_Target: {fileID: 1722629263}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: CreditsPanelToggler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1554,8 +1534,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 64d38e06941c8ff43b847b6debb2f457, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1572,6 +1552,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799928866}
   m_CullTransparentMesh: 1
+--- !u!114 &799928871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799928866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 799928872}
+          m_TargetAssemblyTypeName: ButtonSelectionBehavior, Assembly-CSharp
+          m_MethodName: IfSelected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 799928872}
+          m_TargetAssemblyTypeName: ButtonSelectionBehavior, Assembly-CSharp
+          m_MethodName: NotSelected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 799928872}
+          m_TargetAssemblyTypeName: ButtonSelectionBehavior, Assembly-CSharp
+          m_MethodName: IfSelected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 799928872}
+          m_TargetAssemblyTypeName: ButtonSelectionBehavior, Assembly-CSharp
+          m_MethodName: NotSelected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &799928872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799928866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e729fed164de2f4b87c676f22959966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 1881764272}
 --- !u!1 &872481442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,8 +2574,9 @@ MonoBehaviour:
   menu: {fileID: 1722629265}
   characterMaterial: {fileID: 2100000, guid: 7aac17a732b914440a77988b5288b808, type: 2}
   mainMenuMaterial: {fileID: 2100000, guid: 04b22d3869970954c9f01d31c3b5b279, type: 2}
-  rotationSpeed: 80
   mMCharacterSelectionCamera: {fileID: 960109186}
+  mainMenuPanel: {fileID: 621963120}
+  rotationSpeed: 80
 --- !u!65 &1389975811
 BoxCollider:
   m_ObjectHideFlags: 0

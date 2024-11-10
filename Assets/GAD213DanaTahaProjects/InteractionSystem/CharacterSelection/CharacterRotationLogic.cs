@@ -6,10 +6,11 @@ public class CharacterRotationLogic : MonoBehaviour
 {
     #region Variables.
     public CharacterSelectionMenu menu;
-    public Material characterMaterial;               
-    public Material mainMenuMaterial;                
-    public float rotationSpeed = 20f;
+    public Material characterMaterial;
+    public Material mainMenuMaterial;
     public Camera mMCharacterSelectionCamera;
+    public GameObject mainMenuPanel;
+    public float rotationSpeed = 20f;
 
     private bool _isHovering = false;
     private Quaternion _initialRotation;
@@ -22,7 +23,10 @@ public class CharacterRotationLogic : MonoBehaviour
 
     private void Update()
     {
-        RotateCharacterIfMouseIsHovering();
+        if (mainMenuPanel.activeSelf == false)
+        {
+            RotateCharacterIfMouseIsHovering();
+        }
     }
 
     #region Private Functions.
