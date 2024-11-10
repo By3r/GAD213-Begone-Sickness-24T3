@@ -16,7 +16,6 @@ public class Player_ClimbingSystem : MonoBehaviour
 
     [Header("Spherecast vars")]
     [SerializeField] private LayerMask climbableLayer;
-    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float wallCheckDistance = 1f;
     [SerializeField] private float sphereCastRadius = 0.5f;
 
@@ -33,6 +32,8 @@ public class Player_ClimbingSystem : MonoBehaviour
     private Vector3 _wallNormal;
     private Animator _animator;
     private bool _groundCheckActive = false;
+    private bool _atTopTrigger = false;
+    private bool _atBottomTrigger = false;
 
     #endregion
 
@@ -50,7 +51,7 @@ public class Player_ClimbingSystem : MonoBehaviour
 
     private void Update()
     {
-        if (IsNearClimbableWallFromTorso() && !isClimbing && currentStamina > 0)
+        if (IsNearClimbableWallFromTorso() && !isClimbing && currentStamina > 0 && !_atTopTrigger && !_atBottomTrigger)
         {
             StartClimbing();
         }
@@ -64,16 +65,7 @@ public class Player_ClimbingSystem : MonoBehaviour
                 staminaBar.value = currentStamina / maxStamina;
             }
 
-            if (currentStamina <= 0)
-            {
-                StopClimbing();
-            }
-            if (!IsNearClimbableWallFromFeet())
-            {
-                StopClimbing();
-            }
-
-            if (_groundCheckActive && IsNearGround())
+            if (currentStamina <= 0 || !IsNearClimbableWallFromFeet() || (_groundCheckActive && IsNearGround()))
             {
                 StopClimbing();
             }
@@ -125,6 +117,7 @@ public class Player_ClimbingSystem : MonoBehaviour
     {
         return isClimbing;
     }
+
     #endregion
 
     #region Private Functions
@@ -135,13 +128,8 @@ public class Player_ClimbingSystem : MonoBehaviour
     /// </summary>
     private void ClimbingMovementLogic()
     {
-        float verticalInput = 0;
-        float horizontalInput = 0;
-
-        if (Input.GetKey(KeyCode.W)) verticalInput = 1f;
-        if (Input.GetKey(KeyCode.S)) verticalInput = -1f;
-        if (Input.GetKey(KeyCode.A)) horizontalInput = -1f;
-        if (Input.GetKey(KeyCode.D)) horizontalInput = 1f;
+        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
 
         if (verticalInput != 0 || horizontalInput != 0)
         {
@@ -193,7 +181,7 @@ public class Player_ClimbingSystem : MonoBehaviour
     private bool IsNearGround()
     {
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, sphereCastRadius, Vector3.down, out hit, groundCheckDistance, groundLayer))
+        if (Physics.SphereCast(transform.position, sphereCastRadius, Vector3.down, out hit, groundCheckDistance))
         {
             return true;
         }
@@ -214,10 +202,42 @@ public class Player_ClimbingSystem : MonoBehaviour
         if (torsoTransform != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(torsoTransform.position, sphereCastRadius); 
+            Gizmos.DrawWireSphere(torsoTransform.position, sphereCastRadius);
             Gizmos.DrawWireSphere(transform.position, sphereCastRadius);
         }
     }
 
+    #region Triggers
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ClimbTop"))
+        {
+            _atTopTrigger = true;
+            StopClimbing();
+            Debug.Log("Player reached the top of the climbable area and dismounted.");
+        }
+        else if (other.CompareTag("ClimbBottom"))
+        {
+            _atBottomTrigger = true;
+            StopClimbing();
+            Debug.Log("Player reached the bottom of the climbable area and dismounted.");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("ClimbTop"))
+        {
+            _atTopTrigger = false;
+        }
+        else if (other.CompareTag("ClimbBottom"))
+        {
+            _atBottomTrigger = false;
+        }
+    }
+
     #endregion
+    #endregion
+
+
 }

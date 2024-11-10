@@ -7,7 +7,7 @@ public class ButtonSelectionBehavior : MonoBehaviour
     public TMP_Text buttonText;
 
     private Color _selectedColor = Color.black;
-    private Color _notselectedColor = Color.white;
+    private Color _notselectedColor = new Color(216, 255, 0);
     #endregion
 
     private void Start()
