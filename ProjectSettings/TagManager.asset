@@ -7,6 +7,7 @@ TagManager:
   - SecondaryCamera
   - ClimbTop
   - ClimbBottom
+  - Dropper
   layers:
   - Default
   - TransparentFX

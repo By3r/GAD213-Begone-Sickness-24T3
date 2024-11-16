@@ -414,6 +414,11 @@ MonoBehaviour:
   mMCharacterSelectionCamera: {fileID: 960109186}
   mainMenuPanel: {fileID: 621963120}
   rotationSpeed: 80
+--- !u!1 &210270876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
+  m_PrefabInstance: {fileID: 210270872}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &210270877
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -433,8 +438,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.19, y: 9.21, z: 1}
-  m_Center: {x: 0, y: 4.44, z: 0}
+  m_Size: {x: 8.52, y: 9.209999, z: 1}
+  m_Center: {x: 0.04258932, y: 4.4399996, z: 0}
 --- !u!1 &312489543
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,6 +581,11 @@ MonoBehaviour:
   mMCharacterSelectionCamera: {fileID: 960109186}
   mainMenuPanel: {fileID: 621963120}
   rotationSpeed: 80
+--- !u!1 &367907883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
+  m_PrefabInstance: {fileID: 367907879}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &367907884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -595,8 +605,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.19, y: 9.21, z: 1}
-  m_Center: {x: 0, y: 4.44, z: 0}
+  m_Size: {x: 7.92, y: 9.209999, z: 1}
+  m_Center: {x: -0.02610927, y: 4.4399996, z: 0}
 --- !u!1 &431322886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,6 +1978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2041,6 +2052,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &1002472739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,6 +2601,11 @@ MonoBehaviour:
   mMCharacterSelectionCamera: {fileID: 960109186}
   mainMenuPanel: {fileID: 621963120}
   rotationSpeed: 80
+--- !u!1 &1389975810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: dd230e8da35a1a34d9770dd908ef2114, type: 3}
+  m_PrefabInstance: {fileID: 1389975806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1389975811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2596,8 +2625,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.19, y: 9.21, z: 1}
-  m_Center: {x: 0, y: 4.44, z: 0}
+  m_Size: {x: 8.22, y: 9.209999, z: 1}
+  m_Center: {x: -0.079901844, y: 4.4399996, z: 0}
 --- !u!1 &1390517674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,6 +3483,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b06b32f14b71c764bbc9486b42769dc8, type: 2}
   - {fileID: 2100000, guid: 97587a25a62261a4a8e8fc5ef57971f9, type: 2}
   cameraSwitcher: {fileID: 1722629266}
+  characters:
+  - {fileID: 1389975810}
+  - {fileID: 210270876}
+  - {fileID: 367907883}
+  rotationSpeed: 20
 --- !u!114 &1722629266
 MonoBehaviour:
   m_ObjectHideFlags: 0
