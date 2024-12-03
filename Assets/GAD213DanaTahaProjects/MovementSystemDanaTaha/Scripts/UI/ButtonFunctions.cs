@@ -16,6 +16,13 @@ public class ButtonFunctions : MonoBehaviour
     }
     #endregion
 
+    #region Main Menu.
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    #endregion
+
     #region Credits Button.
     public void CreditsPanelToggler()
     {
