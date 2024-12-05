@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5064305584973298237
+--- !u!1001 &5188992710841480855
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -906.74
+      value: -883.86993
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -48.42
+      value: -57.65
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ad57e8d5012a6a24d9f3b0e1ca2e6b1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       propertyPath: m_Name
-      value: ParacetamolTable
+      value: SoilTable
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -77,35 +77,30 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9116994240851434900}
+      addedObject: {fileID: 6322808623628096244}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8026317543546457965}
+      addedObject: {fileID: 4748870761221881145}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6550718903834545893}
+      addedObject: {fileID: 9118636585194599415}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3513179760646245106}
+      addedObject: {fileID: 1944541324196636635}
   m_SourcePrefab: {fileID: 100100000, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
---- !u!4 &4738559096748334550 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
-  m_PrefabInstance: {fileID: 5064305584973298237}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5370945839752611692 stripped
+--- !u!1 &4954637650079321030 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
-  m_PrefabInstance: {fileID: 5064305584973298237}
+  m_PrefabInstance: {fileID: 5188992710841480855}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &8026317543546457965
+--- !u!65 &4748870761221881145
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5370945839752611692}
+  m_GameObject: {fileID: 4954637650079321030}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -120,13 +115,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01797321, y: 0.017973207, z: 0.015420289}
   m_Center: {x: 0.0000075609423, y: 0.0000053653484, z: -0.005525385}
---- !u!65 &6550718903834545893
+--- !u!65 &9118636585194599415
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5370945839752611692}
+  m_GameObject: {fileID: 4954637650079321030}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -141,13 +136,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.026085913, y: 0.028616821, z: 0.020000009}
   m_Center: {x: 0.004507747, y: 0.00091695087, z: -0.0055253757}
---- !u!114 &3513179760646245106
+--- !u!114 &1944541324196636635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5370945839752611692}
+  m_GameObject: {fileID: 4954637650079321030}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3245804e81b50c438ea5c3576272b9f, type: 3}
@@ -187,13 +182,18 @@ MonoBehaviour:
         m_CallState: 2
   inventory: {fileID: 0}
   ePanel: {fileID: 0}
---- !u!1001 &8722531881310370431
+--- !u!4 &5731314438610440572 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
+  m_PrefabInstance: {fileID: 5188992710841480855}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5779694527478265119
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4738559096748334550}
+    m_TransformParent: {fileID: 5731314438610440572}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
       propertyPath: m_LocalScale.x
@@ -250,10 +250,10 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0ed740027028d684a82ef7d23381fa81, type: 2}
+      objectReference: {fileID: 2100000, guid: e5f610860fe409e4da92cf8014680e45, type: 2}
     - target: {fileID: 919132149155446097, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
       propertyPath: m_Name
-      value: Flask_Paracetamol
+      value: Flask_Soil
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -265,36 +265,37 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6027225633464791327}
+      addedObject: {fileID: 3415700195648084862}
   m_SourcePrefab: {fileID: 100100000, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
---- !u!1 &8488653464208607022 stripped
+--- !u!4 &6322808623628096244 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
+  m_PrefabInstance: {fileID: 5779694527478265119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6698242828307351630 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
-  m_PrefabInstance: {fileID: 8722531881310370431}
+  m_PrefabInstance: {fileID: 5779694527478265119}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &6027225633464791327
-BoxCollider:
+--- !u!114 &3415700195648084862
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8488653464208607022}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_GameObject: {fileID: 6698242828307351630}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0034704704, y: 0.003470471, z: 0.0034557532}
-  m_Center: {x: -0.000055550634, y: 0.00007087814, z: 0.0017104591}
---- !u!4 &9116994240851434900 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b67f3137af704a4e895de8ad71ff72b, type: 3}
-  m_PrefabInstance: {fileID: 8722531881310370431}
-  m_PrefabAsset: {fileID: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3245804e81b50c438ea5c3576272b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flaskName: 
+  flaskSprite: {fileID: 0}
+  onPlayerEnterTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerExitTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  inventory: {fileID: 0}
+  ePanel: {fileID: 0}
