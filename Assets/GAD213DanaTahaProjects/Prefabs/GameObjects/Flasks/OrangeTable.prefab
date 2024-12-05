@@ -198,9 +198,6 @@ PrefabInstance:
       addedObject: {fileID: 7116010444175351027}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6241686080029467994}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1453739200324195179}
   m_SourcePrefab: {fileID: 100100000, guid: 557420168c2412f418f8821ac25a7e90, type: 3}
 --- !u!1 &4777553485588728925 stripped
@@ -250,52 +247,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.026085913, y: 0.028616821, z: 0.020000009}
   m_Center: {x: 0.004507747, y: 0.00091695087, z: -0.0055253757}
---- !u!114 &6241686080029467994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4777553485588728925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3245804e81b50c438ea5c3576272b9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flaskName: Ginger
-  flaskSprite: {fileID: 21300000, guid: fdb10d174591fff47b8aa82f83204caa, type: 3}
-  onPlayerEnterTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FlaskPickup, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onPlayerExitTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FlaskPickup, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  inventory: {fileID: 0}
-  ePanel: {fileID: 0}
 --- !u!114 &1453739200324195179
 MonoBehaviour:
   m_ObjectHideFlags: 0
