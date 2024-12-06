@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PoisonRoom : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Variables.
+
+    public bool isInRoom = false;
+    #endregion
+
+    private void OnTriggerEnter()
     {
-        
+        isInRoom = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
