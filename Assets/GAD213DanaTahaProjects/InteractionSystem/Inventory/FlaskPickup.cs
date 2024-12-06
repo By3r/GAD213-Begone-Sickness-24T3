@@ -11,6 +11,8 @@ public class FlaskPickup : MonoBehaviour
     public PlayerInventory inventory;
     public GameObject ePanel;
 
+    [SerializeField] private InventoryBarToggler inventoryBarToggler;
+
     private bool _isPlayerInRange = false;
     #endregion
 
@@ -36,6 +38,7 @@ public class FlaskPickup : MonoBehaviour
     {
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E) && inventory != null)
         {
+            inventoryBarToggler.ToggleInventoryBar();
             FlaskPickup flaskData = GetComponent<FlaskPickup>();
             if (flaskData != null)
             {
@@ -49,15 +52,25 @@ public class FlaskPickup : MonoBehaviour
                     Debug.Log("Inventory is full!");
                 }
             }
+            Invoke("ToggleInventoryBarForSomeTime", 3f);
         }
     }
 
-
+    #region Public Functions.
     public void EForPickupToggler()
     {
         if (ePanel != null)
         {
+
             ePanel.SetActive(!ePanel.activeSelf);
         }
     }
+    #endregion
+
+    #region Private Functions
+    private void ToggleInventoryBarForSomeTime()
+    {
+        inventoryBarToggler.ToggleInventoryBar();
+    }
+    #endregion
 }

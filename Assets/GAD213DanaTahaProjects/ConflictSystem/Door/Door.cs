@@ -10,7 +10,7 @@ public class Door : MonoBehaviour
 {
     #region
     [SerializeField] private Animator animator;
-    [SerializeField] private PoisonRoom poisonRoom;
+    [SerializeField] private SicknessRoom sicknessRoom;
 
     private bool _playerEntered;
     #endregion
@@ -24,7 +24,7 @@ public class Door : MonoBehaviour
     private void OnTriggerExit()
     {
         animator.SetBool("isDoorOpen", false);
-        if (poisonRoom.isInRoom == true)
+        if (sicknessRoom.isInRoom == true)
         {
             _playerEntered = true;
         }
