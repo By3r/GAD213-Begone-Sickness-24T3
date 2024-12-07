@@ -15,5 +15,5 @@ MonoBehaviour:
   resultName: SoilRemedy
   resultSprite: {fileID: 21300000, guid: d3e82e01cf8dde740b30c01b77312fba, type: 3}
   ingredients:
-  - Rare_Soil_Flask
-  - Rare_Lemon_Flask
+  - Soil
+  - Lemon

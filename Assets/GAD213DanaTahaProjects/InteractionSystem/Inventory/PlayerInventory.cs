@@ -10,25 +10,25 @@ public class PlayerInventory : MonoBehaviour
 
     public bool AddFlask(GameObject flask, Sprite flaskSprite)
     {
-        for (int i = 0; i < inventory.Length; i++) 
+        for (int i = 0; i < inventory.Length; i++)
         {
-            if (inventory[i] == null) 
+            if (inventory[i] == null && inventorySprites[i] == null) 
             {
-                inventory[i] = flask; 
-                inventorySprites[i] = flaskSprite; 
-                inventoryUI.UpdateInventoryUI(); 
-                return true; 
+                inventory[i] = flask;
+                inventorySprites[i] = flaskSprite;
+                inventoryUI.UpdateInventoryUI();
+                return true;
             }
         }
         Debug.Log("Inventory is full!");
-        return false; 
+        return false;
     }
 
 
 
     public void RemoveFlask(int index)
     {
-        if (index >= 0 && index < inventory.Length && inventory[index] != null)
+        if (index >= 0 && index < inventory.Length)
         {
             inventory[index] = null;
             inventorySprites[index] = null;

@@ -15,5 +15,5 @@ MonoBehaviour:
   resultName: CoughSyrup
   resultSprite: {fileID: 21300000, guid: 67032adca5c422842bf43658ceb99d59, type: 3}
   ingredients:
-  - Rare_Honey_Flask
-  - Rare_Ginger_Flask
+  - Honey
+  - Ginger

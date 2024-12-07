@@ -15,5 +15,5 @@ MonoBehaviour:
   resultName: WellnessShot
   resultSprite: {fileID: 21300000, guid: 7904018e3fd6c1644935312b5dc9e5cf, type: 3}
   ingredients:
-  - Rare_Ginger_Flask
-  - Rare_Orange_Flask
+  - Ginger
+  - Orange

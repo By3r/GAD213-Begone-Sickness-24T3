@@ -1,6 +1,7 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using TMPro;
 
 public class MedicineCrafting : MonoBehaviour
 {
@@ -13,9 +14,11 @@ public class MedicineCrafting : MonoBehaviour
     public UnityEvent onPlayerEnterTrigger;
     public UnityEvent onPlayerExitTrigger;
 
-    public Image[] craftingSlots;
+    public Image[] craftingSlots; 
+    public TMP_Text[] craftingSlotTexts; 
+    public TMP_Text resultNameText; 
     public Sprite errorSprite;
-    private GameObject[] _craftingItems = new GameObject[2];
+    private Sprite[] _craftingItems = new Sprite[2]; 
     private Sprite _resultSprite;
     private string _resultName;
 
@@ -42,13 +45,13 @@ public class MedicineCrafting : MonoBehaviour
         }
     }
 
-    #region Triggers
+    #region Trigger Events
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            onPlayerEnterTrigger.Invoke();
             _isPlayerInRange = true;
+            onPlayerEnterTrigger.Invoke();
         }
     }
 
@@ -56,8 +59,9 @@ public class MedicineCrafting : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            onPlayerExitTrigger.Invoke();
             _isPlayerInRange = false;
+            onPlayerExitTrigger.Invoke();
+
             if (_isCraftingUIOpen)
             {
                 CloseCraftingUI();
@@ -82,75 +86,80 @@ public class MedicineCrafting : MonoBehaviour
         ClearCraftingSlots();
     }
 
-    public void OnInventorySlotClicked(int inventorySlot)
+    public bool PlaceInCraftingSlot(Sprite flaskSprite)
     {
-        if (!_isCraftingUIOpen) return;
-
-        GameObject flask = playerInventory.inventory[inventorySlot];
-        if (flask != null && (_craftingItems[0] == null || _craftingItems[1] == null))
+        if (!_isCraftingUIOpen)
         {
-            FlaskPickup flaskData = flask.GetComponent<FlaskPickup>();
-            if (flaskData != null)
+            return false;
+        }
+
+        for (int i = 0; i < _craftingItems.Length; i++)
+        {
+            if (_craftingItems[i] == null)
             {
-                for (int i = 0; i < _craftingItems.Length; i++)
-                {
-                    if (_craftingItems[i] == null)
-                    {
-                        _craftingItems[i] = flask;
-                        craftingSlots[i].sprite = flaskData.flaskSprite;
-                        playerInventory.RemoveFlask(inventorySlot);
-                        CheckRecipe();
-                        return;
-                    }
-                }
+                _craftingItems[i] = flaskSprite; 
+                craftingSlots[i].sprite = flaskSprite; 
+                craftingSlotTexts[i].text = flaskSprite.name;
+                CheckRecipe();
+                return true;
             }
         }
+        return false;
     }
-
 
     public void OnCraftingSlotClicked(int slotIndex)
     {
         if (!_isCraftingUIOpen || _craftingItems[slotIndex] == null) return;
 
-        FlaskPickup flaskData = _craftingItems[slotIndex].GetComponent<FlaskPickup>();
-        if (flaskData != null)
+        Sprite flaskSprite = _craftingItems[slotIndex];
+
+        bool added = playerInventory.AddFlask(null, flaskSprite);
+        if (!added)
         {
-            playerInventory.AddFlask(_craftingItems[slotIndex], flaskData.flaskSprite);
+            return;
         }
 
         _craftingItems[slotIndex] = null;
         craftingSlots[slotIndex].sprite = null;
+        craftingSlotTexts[slotIndex].text = ""; 
         craftingSlots[2].sprite = null;
+        resultNameText.text = ""; 
         _resultSprite = null;
         _resultName = null;
+
+        CheckRecipe();
     }
 
     public void OnResultSlotClicked()
     {
-        if (_resultSprite == errorSprite || _resultSprite == null) return;
+        if (_resultSprite == null || _resultSprite == errorSprite) return;
 
-        for (int i = 0; i < _craftingItems.Length; i++)
+        bool added = playerInventory.AddFlask(null, _resultSprite);
+        if (added)
         {
-            _craftingItems[i] = null;
-            craftingSlots[i].sprite = null;
+            craftingSlots[2].sprite = null;
+            resultNameText.text = ""; 
+            _resultSprite = null;
+            _resultName = null;
+
+            for (int i = 0; i < _craftingItems.Length; i++)
+            {
+                _craftingItems[i] = null;
+                craftingSlots[i].sprite = null;
+                craftingSlotTexts[i].text = ""; 
+            }
         }
-
-        playerInventory.AddFlask(new GameObject(_resultName), _resultSprite);
-
-        craftingSlots[2].sprite = null;
-        _resultSprite = null;
-        _resultName = null;
     }
     #endregion
 
     #region Private Functions
     private void CheckRecipe()
     {
-        if (_craftingItems[0] == null || _craftingItems[1] == null) return;
+        if (craftingSlots[0].sprite == null || craftingSlots[1].sprite == null) return;
 
         string[] ingredientNames = new string[2];
-        ingredientNames[0] = _craftingItems[0].GetComponent<FlaskPickup>().flaskName;
-        ingredientNames[1] = _craftingItems[1].GetComponent<FlaskPickup>().flaskName;
+        ingredientNames[0] = craftingSlots[0].sprite.name;
+        ingredientNames[1] = craftingSlots[1].sprite.name;
 
         foreach (CraftingRecipe recipe in recipes)
         {
@@ -160,29 +169,31 @@ public class MedicineCrafting : MonoBehaviour
                 _resultName = recipe.resultName;
                 _resultSprite = recipe.resultSprite;
                 craftingSlots[2].sprite = _resultSprite;
+                resultNameText.text = _resultName;
                 return;
             }
         }
 
         _resultSprite = errorSprite;
         craftingSlots[2].sprite = errorSprite;
+        resultNameText.text = "Invalid Recipe"; 
         _resultName = null;
     }
-
 
     private void ClearCraftingSlots()
     {
         for (int i = 0; i < craftingSlots.Length; i++)
         {
             craftingSlots[i].sprite = null;
+            craftingSlotTexts[i].text = ""; 
         }
         _craftingItems[0] = null;
         _craftingItems[1] = null;
+        craftingSlots[2].sprite = null; 
+        resultNameText.text = ""; 
         _resultSprite = null;
         _resultName = null;
-
     }
-
 
     private void ReturnIngredients()
     {
@@ -190,12 +201,10 @@ public class MedicineCrafting : MonoBehaviour
         {
             if (_craftingItems[i] != null)
             {
-                FlaskPickup flaskData = _craftingItems[i].GetComponent<FlaskPickup>();
-                if (flaskData != null)
-                {
-                    playerInventory.AddFlask(_craftingItems[i], flaskData.flaskSprite);
-                }
+                Sprite flaskSprite = _craftingItems[i];
+                bool added = playerInventory.AddFlask(null, flaskSprite);
                 _craftingItems[i] = null;
+                craftingSlotTexts[i].text = ""; 
             }
         }
     }
