@@ -24,7 +24,7 @@ public class Door : MonoBehaviour
     private void OnTriggerExit()
     {
         animator.SetBool("isDoorOpen", false);
-        if (sicknessRoom.isInRoom == true)
+        if (sicknessRoom.isPlayerInRoom == true)
         {
             _playerEntered = true;
         }
