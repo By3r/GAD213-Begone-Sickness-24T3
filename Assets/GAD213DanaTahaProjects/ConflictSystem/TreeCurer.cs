@@ -1,14 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine;
-
-
-/// <summary>
-/// Created this for tree curing logic, It opens the curepanel of a connected panel and players utilise
-/// their inventory to place and remove flasks.
-/// </summary>
 
 public class TreeCurer : MonoBehaviour
 {
@@ -18,11 +10,13 @@ public class TreeCurer : MonoBehaviour
     public Material curedTreeMaterial;
     public PlayerInventory playerInventory;
     public Sprite correctFlask;
+    public bool isCured = false;
 
     public UnityEvent onPlayerEnter;
-    public UnityEvent onePlayerExit;
+    public UnityEvent onPlayerExit;
 
-    private bool _isCured = false;
+    [SerializeField] private SicknessBar sicknessBar;
+
     private Sprite _currentFlask;
     private bool _isPlayerInRange = false;
     private Renderer _treeRenderer;
@@ -31,7 +25,6 @@ public class TreeCurer : MonoBehaviour
     private void Start()
     {
         treeCurePanel.SetActive(false);
-
         _treeRenderer = GetComponent<Renderer>();
     }
 
@@ -45,7 +38,7 @@ public class TreeCurer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !_isCured)
+        if (other.CompareTag("Player") && !isCured)
         {
             _isPlayerInRange = true;
         }
@@ -70,6 +63,11 @@ public class TreeCurer : MonoBehaviour
     public void OpenPanel()
     {
         treeCurePanel.SetActive(true);
+
+        if (!isCured)
+        {
+            sicknessBar.sicknessSlider.gameObject.SetActive(false);
+        }
     }
 
     public void ClosePanel()
@@ -80,6 +78,11 @@ public class TreeCurer : MonoBehaviour
         {
             _currentFlask = null;
             cureSlot.sprite = null;
+        }
+
+        if (!isCured)
+        {
+            sicknessBar.sicknessSlider.gameObject.SetActive(true);
         }
     }
 
@@ -96,27 +99,40 @@ public class TreeCurer : MonoBehaviour
         }
     }
 
-    public void PlaceFlaskInSlot(Sprite flaskSprite)
+    public bool PlaceFlaskInSlot(Sprite flaskSprite)
     {
         if (_currentFlask == null)
         {
             _currentFlask = flaskSprite;
             cureSlot.sprite = flaskSprite;
+            return true;
         }
+        return false;
     }
 
     public void ConfirmSelection()
     {
         if (_currentFlask == null)
         {
+            Debug.Log("No flask placed.");
             return;
         }
 
         if (_currentFlask == correctFlask)
         {
-            _isCured = true;
+            isCured = true;
+            sicknessBar.DecreaseScikness(50f);
             _treeRenderer.material = curedTreeMaterial;
+            sicknessBar.sicknessSlider.gameObject.SetActive(false); 
+            Debug.Log("Correct flask! Tree cured.");
             ClosePanel();
+        }
+        else
+        {
+            sicknessBar.IncreaseSickness(sicknessBar.sicknessIncreaseRate * 2); 
+            Debug.Log($"Incorrect flask! Sickness increased. Flask {_currentFlask.name} destroyed.");
+            _currentFlask = null; 
+            cureSlot.sprite = null; 
         }
     }
 }

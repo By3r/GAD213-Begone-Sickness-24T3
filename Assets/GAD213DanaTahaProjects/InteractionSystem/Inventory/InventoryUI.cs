@@ -7,7 +7,8 @@ public class InventoryUI : MonoBehaviour
     public PlayerInventory playerInventory;
     public Button[] slotButtons;
     public Sprite emptySlotSprite;
-    public MedicineCrafting medicineCrafting;
+    public MedicineCrafting medicineCrafting; 
+    public TreeCurer treeCurer; 
     #endregion
 
     public void UpdateInventoryUI()
@@ -39,11 +40,23 @@ public class InventoryUI : MonoBehaviour
 
         if (flaskSprite != null)
         {
-            bool placed = medicineCrafting.PlaceInCraftingSlot(flaskSprite);
-
-            if (placed)
+            if (treeCurer.treeCurePanel.activeSelf)
             {
-                playerInventory.RemoveFlask(slotIndex);
+                bool placed = treeCurer.PlaceFlaskInSlot(flaskSprite);
+
+                if (placed)
+                {
+                    playerInventory.RemoveFlask(slotIndex);
+                }
+            }
+            else if (medicineCrafting.craftingUI.activeSelf)
+            {
+                bool placed = medicineCrafting.PlaceInCraftingSlot(flaskSprite);
+
+                if (placed)
+                {
+                    playerInventory.RemoveFlask(slotIndex);
+                }
             }
         }
     }

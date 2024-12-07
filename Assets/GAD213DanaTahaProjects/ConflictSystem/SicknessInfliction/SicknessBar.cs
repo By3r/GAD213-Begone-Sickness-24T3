@@ -4,79 +4,90 @@ using UnityEngine.UI;
 public class SicknessBar : MonoBehaviour
 {
     #region Variables
+    public float sicknessIncreaseRate = 0.5f;
+    public Slider sicknessSlider;
 
-    [SerializeField] private float maxSickness = 100f; 
-    [SerializeField] private float sicknessIncreaseRate = 5f;
-    [SerializeField] private float regenerationRate = 2f; 
-    [SerializeField] private Slider sicknessBar; 
+    [SerializeField] private float maxSickness = 100f;
+    [SerializeField] private float decreasingRate = 2f;
 
     private float _currentSickness;
-
-    private bool isPlayerInSicknessRoom = false;
-
+    private bool _isPlayerInSicknessRoom = false;
     #endregion
 
     private void Start()
     {
         _currentSickness = 0f;
 
-        if (sicknessBar != null)
+        if (sicknessSlider != null)
         {
-            sicknessBar.gameObject.SetActive(false); 
-            sicknessBar.maxValue = maxSickness;
-            sicknessBar.value = _currentSickness;
+            SetDefaultSicknessBarValues("The sickness bar's Activeness is:", false, maxSickness, _currentSickness);
         }
     }
 
     private void Update()
     {
-        if (isPlayerInSicknessRoom)
+        if (_isPlayerInSicknessRoom)
         {
             IncreaseSickness(sicknessIncreaseRate * Time.deltaTime);
         }
         else
         {
-            RegenerateSickness(regenerationRate * Time.deltaTime);
+            DecreaseScikness(decreasingRate * Time.deltaTime);
         }
 
         UpdateUI();
     }
 
+    #region Public Functions
     public void EnterSicknessRoom()
     {
-        isPlayerInSicknessRoom = true;
+        _isPlayerInSicknessRoom = true;
 
-        if (sicknessBar != null)
+        if (sicknessSlider != null)
         {
-            sicknessBar.gameObject.SetActive(true); 
+            sicknessSlider.gameObject.SetActive(true);
         }
     }
 
     public void ExitSicknessRoom()
     {
-        isPlayerInSicknessRoom = false;
+        _isPlayerInSicknessRoom = false;
 
-        if (sicknessBar != null && _currentSickness <= 0)
+        if (sicknessSlider != null && _currentSickness <= 0)
         {
-            sicknessBar.gameObject.SetActive(false); 
+            sicknessSlider.gameObject.SetActive(false);
         }
     }
 
     public void IncreaseSickness(float amount)
     {
         _currentSickness = Mathf.Clamp(_currentSickness + amount, 0, maxSickness);
-    }
 
-    private void RegenerateSickness(float amount)
+        if (_currentSickness >= maxSickness)
+        {
+            Debug.Log("Player dies");
+        }
+    }
+    public void DecreaseScikness(float amount)
     {
         _currentSickness = Mathf.Clamp(_currentSickness - amount, 0, maxSickness);
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
-        if (sicknessBar != null)
+        if (sicknessSlider != null)
         {
-            sicknessBar.value = _currentSickness;
+            sicknessSlider.value = _currentSickness;
         }
     }
+    #endregion
+
+    #region Private Functions
+    private void SetDefaultSicknessBarValues(string boolDescription, bool ttrue, float maxSicknessValue, float currentSicknessValue)
+    {
+        sicknessSlider.gameObject.SetActive(ttrue);
+        sicknessSlider.maxValue = maxSicknessValue;
+        sicknessSlider.value = currentSicknessValue;
+    }
+    #endregion
 }

@@ -52,7 +52,7 @@ public class FlaskPickup : MonoBehaviour
                     Debug.Log("Inventory is full!");
                 }
             }
-            Invoke("ToggleInventoryBarForSomeTime", 3f);
+            Invoke("ToggleInventoryBarForSomeTime", 1.5f);
         }
     }
 

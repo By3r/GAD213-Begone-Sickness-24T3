@@ -14,11 +14,11 @@ public class MedicineCrafting : MonoBehaviour
     public UnityEvent onPlayerEnterTrigger;
     public UnityEvent onPlayerExitTrigger;
 
-    public Image[] craftingSlots; 
-    public TMP_Text[] craftingSlotTexts; 
-    public TMP_Text resultNameText; 
+    public Image[] craftingSlots;
+    public TMP_Text[] craftingSlotTexts;
+    public TMP_Text resultNameText;
     public Sprite errorSprite;
-    private Sprite[] _craftingItems = new Sprite[2]; 
+    private Sprite[] _craftingItems = new Sprite[2];
     private Sprite _resultSprite;
     private string _resultName;
 
@@ -40,6 +40,7 @@ public class MedicineCrafting : MonoBehaviour
 
         if (_isCraftingUIOpen && Input.GetKeyDown(KeyCode.Escape))
         {
+            onPlayerEnterTrigger.Invoke();
             CloseCraftingUI();
             inventoryBarToggler.ToggleInventoryBar();
         }
@@ -97,8 +98,8 @@ public class MedicineCrafting : MonoBehaviour
         {
             if (_craftingItems[i] == null)
             {
-                _craftingItems[i] = flaskSprite; 
-                craftingSlots[i].sprite = flaskSprite; 
+                _craftingItems[i] = flaskSprite;
+                craftingSlots[i].sprite = flaskSprite;
                 craftingSlotTexts[i].text = flaskSprite.name;
                 CheckRecipe();
                 return true;
@@ -121,9 +122,9 @@ public class MedicineCrafting : MonoBehaviour
 
         _craftingItems[slotIndex] = null;
         craftingSlots[slotIndex].sprite = null;
-        craftingSlotTexts[slotIndex].text = ""; 
+        craftingSlotTexts[slotIndex].text = "";
         craftingSlots[2].sprite = null;
-        resultNameText.text = ""; 
+        resultNameText.text = "";
         _resultSprite = null;
         _resultName = null;
 
@@ -138,7 +139,7 @@ public class MedicineCrafting : MonoBehaviour
         if (added)
         {
             craftingSlots[2].sprite = null;
-            resultNameText.text = ""; 
+            resultNameText.text = "";
             _resultSprite = null;
             _resultName = null;
 
@@ -146,7 +147,7 @@ public class MedicineCrafting : MonoBehaviour
             {
                 _craftingItems[i] = null;
                 craftingSlots[i].sprite = null;
-                craftingSlotTexts[i].text = ""; 
+                craftingSlotTexts[i].text = "";
             }
         }
     }
@@ -176,7 +177,7 @@ public class MedicineCrafting : MonoBehaviour
 
         _resultSprite = errorSprite;
         craftingSlots[2].sprite = errorSprite;
-        resultNameText.text = "Invalid Recipe"; 
+        resultNameText.text = "Invalid Recipe";
         _resultName = null;
     }
 
@@ -185,12 +186,12 @@ public class MedicineCrafting : MonoBehaviour
         for (int i = 0; i < craftingSlots.Length; i++)
         {
             craftingSlots[i].sprite = null;
-            craftingSlotTexts[i].text = ""; 
+            craftingSlotTexts[i].text = "";
         }
         _craftingItems[0] = null;
         _craftingItems[1] = null;
-        craftingSlots[2].sprite = null; 
-        resultNameText.text = ""; 
+        craftingSlots[2].sprite = null;
+        resultNameText.text = "";
         _resultSprite = null;
         _resultName = null;
     }
@@ -204,7 +205,7 @@ public class MedicineCrafting : MonoBehaviour
                 Sprite flaskSprite = _craftingItems[i];
                 bool added = playerInventory.AddFlask(null, flaskSprite);
                 _craftingItems[i] = null;
-                craftingSlotTexts[i].text = ""; 
+                craftingSlotTexts[i].text = "";
             }
         }
     }

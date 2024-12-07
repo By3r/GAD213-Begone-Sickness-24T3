@@ -1,32 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// A simple door openning and closing mechanic.
+/// A simple door opening and closing mechanic.
 /// </summary>
-
 public class Door : MonoBehaviour
 {
-    #region
+    #region Variables
     [SerializeField] private Animator animator;
     [SerializeField] private SicknessRoom sicknessRoom;
+    [SerializeField] private TreeCurer treeCurer;
+    [SerializeField] private TMP_Text informativeText;
 
     private bool _playerEntered;
     #endregion
 
-    private void OnTriggerEnter()
+    private void Start()
     {
-        if (_playerEntered) { Debug.Log("Can't open");  return; }
-        animator.SetBool("isDoorOpen", true);
+        informativeText.text = string.Empty;
     }
 
-    private void OnTriggerExit()
+    private void OnTriggerEnter(Collider other)
     {
-        animator.SetBool("isDoorOpen", false);
-        if (sicknessRoom.isPlayerInRoom == true)
+        if (other.CompareTag("Player"))
         {
-            _playerEntered = true;
+            if (_playerEntered || (!treeCurer.isCured && sicknessRoom.isPlayerInRoom))
+            {
+                informativeText.text = "Door is locked!";
+                Invoke("EmptyInformativeText", 0.3f);
+                return;
+            }
+
+            animator.SetBool("isDoorOpen", true);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            animator.SetBool("isDoorOpen", false);
+            Debug.Log("Door closed.");
+
+            if (sicknessRoom.isPlayerInRoom)
+            {
+                _playerEntered = true;
+            }
+        }
+    }
+
+    private void EmptyInformativeText()
+    {
+        informativeText.text = string.Empty;
     }
 }

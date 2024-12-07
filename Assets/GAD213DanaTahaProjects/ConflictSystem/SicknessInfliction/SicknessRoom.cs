@@ -5,17 +5,18 @@ public class SicknessRoom : MonoBehaviour
     #region Variables
     public bool isPlayerInRoom;
     [SerializeField] private SicknessBar sicknessBar;
+    [SerializeField] private TreeCurer treeCurer;
 
     #endregion
 
-    void Star()
+    void Start()
     {
         isPlayerInRoom = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && treeCurer.isCured == false)
         {
             isPlayerInRoom = true;
             sicknessBar.EnterSicknessRoom();
