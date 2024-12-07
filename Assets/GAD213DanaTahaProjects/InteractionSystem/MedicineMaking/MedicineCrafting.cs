@@ -83,7 +83,7 @@ public class MedicineCrafting : MonoBehaviour
     {
         craftingUI.SetActive(false);
         _isCraftingUIOpen = false;
-        ReturnIngredients();
+        // ReturnIngredients();
         ClearCraftingSlots();
     }
 

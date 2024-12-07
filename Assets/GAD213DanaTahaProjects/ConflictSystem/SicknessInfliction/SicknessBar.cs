@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SicknessBar : MonoBehaviour
 {
     #region Variables
-    public float sicknessIncreaseRate = 0.5f;
+    public float sicknessIncreaseRate;
     public Slider sicknessSlider;
 
     [SerializeField] private float maxSickness = 100f;
@@ -68,6 +68,7 @@ public class SicknessBar : MonoBehaviour
             Debug.Log("Player dies");
         }
     }
+
     public void DecreaseScikness(float amount)
     {
         _currentSickness = Mathf.Clamp(_currentSickness - amount, 0, maxSickness);
@@ -79,6 +80,11 @@ public class SicknessBar : MonoBehaviour
         {
             sicknessSlider.value = _currentSickness;
         }
+    }
+
+    public void SetSicknessIncreaseRate(float newIncreaseRate)
+    {
+        sicknessIncreaseRate = newIncreaseRate;
     }
     #endregion
 

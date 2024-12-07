@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine;
+using TMPro;
 
 public class TreeCurer : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class TreeCurer : MonoBehaviour
     public UnityEvent onPlayerExit;
 
     [SerializeField] private SicknessBar sicknessBar;
+    [SerializeField] private TMP_Text flaskNameText; 
 
     private Sprite _currentFlask;
     private bool _isPlayerInRange = false;
@@ -26,6 +28,7 @@ public class TreeCurer : MonoBehaviour
     {
         treeCurePanel.SetActive(false);
         _treeRenderer = GetComponent<Renderer>();
+        UpdateFlaskName(""); 
     }
 
     private void Update()
@@ -54,6 +57,7 @@ public class TreeCurer : MonoBehaviour
             {
                 _currentFlask = null;
                 cureSlot.sprite = null;
+                UpdateFlaskName(""); 
             }
 
             ClosePanel();
@@ -78,6 +82,7 @@ public class TreeCurer : MonoBehaviour
         {
             _currentFlask = null;
             cureSlot.sprite = null;
+            UpdateFlaskName(""); 
         }
 
         if (!isCured)
@@ -95,6 +100,7 @@ public class TreeCurer : MonoBehaviour
             {
                 _currentFlask = null;
                 cureSlot.sprite = null;
+                UpdateFlaskName(""); 
             }
         }
     }
@@ -105,16 +111,26 @@ public class TreeCurer : MonoBehaviour
         {
             _currentFlask = flaskSprite;
             cureSlot.sprite = flaskSprite;
+            UpdateFlaskName(flaskSprite.name);
+
+            if (flaskSprite != correctFlask)
+            {
+                sicknessBar.SetSicknessIncreaseRate(sicknessBar.sicknessIncreaseRate + 0.5f);
+                sicknessBar.IncreaseSickness(sicknessBar.sicknessIncreaseRate);
+            }
+
             return true;
         }
+
         return false;
     }
+
+
 
     public void ConfirmSelection()
     {
         if (_currentFlask == null)
         {
-            Debug.Log("No flask placed.");
             return;
         }
 
@@ -123,16 +139,24 @@ public class TreeCurer : MonoBehaviour
             isCured = true;
             sicknessBar.DecreaseScikness(50f);
             _treeRenderer.material = curedTreeMaterial;
-            sicknessBar.sicknessSlider.gameObject.SetActive(false); 
-            Debug.Log("Correct flask! Tree cured.");
+            sicknessBar.sicknessSlider.gameObject.SetActive(false);
             ClosePanel();
         }
         else
         {
-            sicknessBar.IncreaseSickness(sicknessBar.sicknessIncreaseRate * 2); 
-            Debug.Log($"Incorrect flask! Sickness increased. Flask {_currentFlask.name} destroyed.");
-            _currentFlask = null; 
-            cureSlot.sprite = null; 
+            sicknessBar.IncreaseSickness(sicknessBar.sicknessIncreaseRate + 1);
+            _currentFlask = null;
+            cureSlot.sprite = null;
+            UpdateFlaskName("");
+            ClosePanel();
+        }
+    }
+
+    private void UpdateFlaskName(string flaskName)
+    {
+        if (flaskNameText != null)
+        {
+            flaskNameText.text = flaskName; 
         }
     }
 }

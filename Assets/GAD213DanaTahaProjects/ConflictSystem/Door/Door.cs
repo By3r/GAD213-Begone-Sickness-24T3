@@ -24,7 +24,7 @@ public class Door : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (_playerEntered || (!treeCurer.isCured && sicknessRoom.isPlayerInRoom))
+            if (!treeCurer.isCured && sicknessRoom.isPlayerInRoom)
             {
                 informativeText.text = "Door is locked!";
                 Invoke("EmptyInformativeText", 0.3f);
