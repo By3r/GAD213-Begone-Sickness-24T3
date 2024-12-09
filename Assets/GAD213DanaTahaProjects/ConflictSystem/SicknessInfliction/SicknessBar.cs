@@ -9,6 +9,11 @@ public class SicknessBar : MonoBehaviour
 
     [SerializeField] private float maxSickness = 100f;
     [SerializeField] private float decreasingRate = 2f;
+    [SerializeField] private GameObject player;
+    [SerializeField] private Vector3 playerRespawnLocation;
+    [SerializeField] private SicknessRoom sicknessRoom;
+    [SerializeField] private TreeCurer treeCurer;
+    [SerializeField] private Door door;
 
     private float _currentSickness;
     private bool _isPlayerInSicknessRoom = false;
@@ -39,6 +44,18 @@ public class SicknessBar : MonoBehaviour
     }
 
     #region Public Functions
+    public void ResetSicknessBar()
+    {
+        _currentSickness = 0f;
+        sicknessSlider.value = _currentSickness;
+        sicknessSlider.gameObject.SetActive(false);
+    }
+
+    public bool IsSicknessBarActive()
+    {
+        return sicknessSlider.gameObject.activeSelf;
+    }
+
     public void EnterSicknessRoom()
     {
         _isPlayerInSicknessRoom = true;
@@ -52,8 +69,9 @@ public class SicknessBar : MonoBehaviour
     public void ExitSicknessRoom()
     {
         _isPlayerInSicknessRoom = false;
+        _currentSickness = 0f;
 
-        if (sicknessSlider != null && _currentSickness <= 0)
+        if (sicknessSlider != null && _currentSickness <= 0f)
         {
             sicknessSlider.gameObject.SetActive(false);
         }
@@ -65,7 +83,17 @@ public class SicknessBar : MonoBehaviour
 
         if (_currentSickness >= maxSickness)
         {
-            Debug.Log("Player dies");
+            SetSicknessIncreaseRate(0.5f);
+            player.SetActive(false);
+            _currentSickness = 0f;
+            player.transform.position = playerRespawnLocation;
+
+            ResetSicknessBar();
+            sicknessRoom.ResetSicknessRoom();
+            treeCurer.ResetTreeCurer();
+            door.ResetDoor();
+
+            Invoke("SetPlayerBackAsActive", 3f);
         }
     }
 
@@ -94,6 +122,11 @@ public class SicknessBar : MonoBehaviour
         sicknessSlider.gameObject.SetActive(ttrue);
         sicknessSlider.maxValue = maxSicknessValue;
         sicknessSlider.value = currentSicknessValue;
+    }
+
+    private void SetPlayerBackAsActive()
+    {
+        player.SetActive(true);
     }
     #endregion
 }

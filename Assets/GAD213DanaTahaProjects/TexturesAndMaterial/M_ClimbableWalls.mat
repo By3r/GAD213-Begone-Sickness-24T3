@@ -26,10 +26,17 @@ Material:
     m_Ints: []
     m_Floats:
     - _Glossiness: 0
+    - _HighIntensity: 2.48
+    - _LightScalar: 2.48
+    - _LowIntensity: 0.83
     - _Metallic: 0.086
+    - _OutlineSize: 20
+    - _RampLevels: 6
+    - _RimAlpha: 0
     m_Colors:
-    - _Color: {r: 0.5756497, g: 0.7264151, b: 0.38719293, a: 1}
+    - _Color: {r: 0.70612115, g: 1, b: 0.33490568, a: 1}
     - _HighColor: {r: 1, g: 0.97934794, b: 0.7877358, a: 1}
-    - _LowColor: {r: 0.2278685, g: 0.5754717, b: 0, a: 1}
+    - _LowColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+    - _OutlineColor: {r: 1, g: 0.9990684, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

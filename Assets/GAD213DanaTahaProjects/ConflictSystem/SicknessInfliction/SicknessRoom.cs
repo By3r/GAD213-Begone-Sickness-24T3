@@ -9,17 +9,22 @@ public class SicknessRoom : MonoBehaviour
 
     #endregion
 
-    void Start()
+    private void Start()
     {
         isPlayerInRoom = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && treeCurer.isCured == false)
         {
             isPlayerInRoom = true;
             sicknessBar.EnterSicknessRoom();
+        }
+        else
+        {
+            isPlayerInRoom = false;
+            sicknessBar.ExitSicknessRoom();
         }
     }
 
@@ -30,5 +35,11 @@ public class SicknessRoom : MonoBehaviour
             isPlayerInRoom = false;
             sicknessBar.ExitSicknessRoom();
         }
+    }
+
+    public void ResetSicknessRoom()
+    {
+        isPlayerInRoom = false;
+        sicknessBar.ExitSicknessRoom();
     }
 }

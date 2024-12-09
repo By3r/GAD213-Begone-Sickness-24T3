@@ -761,21 +761,10 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6927966032501362575, guid: 363aa2d3c66c5ec46aaff4ef6f142fd7, type: 3}
   m_PrefabInstance: {fileID: 4624518208922073173}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4624518208922073174}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6509045dca49d5847958cbc3b574568d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &65252579 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1188155651635303610, guid: 363aa2d3c66c5ec46aaff4ef6f142fd7, type: 3}
-  m_PrefabInstance: {fileID: 4624518208922073173}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b046a289b8ae684439ff87e4714726c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &65576287
@@ -1778,6 +1767,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5728246934298840811}
+        m_TargetAssemblyTypeName: FlaskPickup, Assembly-CSharp
+        m_MethodName: EForPickupToggler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &146037945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2341,6 +2342,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44b58803d72533c41afbda978a642390, type: 3}
+--- !u!1 &226041902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2022893630217629663, guid: 44b58803d72533c41afbda978a642390, type: 3}
+  m_PrefabInstance: {fileID: 226041901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &232102774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3114,7 +3120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerInRoom: 0
-  sicknessBar: {fileID: 65252579}
+  sicknessBar: {fileID: 1639141729}
   treeCurer: {fileID: 953998939}
 --- !u!1 &288543145
 GameObject:
@@ -3150,7 +3156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -88.77}
+  m_AnchoredPosition: {x: 0, y: -211}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288543147
@@ -3630,7 +3636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320873463}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.00000004669622, z: -0.0000000036152081, w: 1}
+  m_LocalRotation: {x: -0, y: -0.00000004669622, z: 0.0000000036152081, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7950,6 +7956,142 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5189155736762309886, guid: b109f915d68c6414ab28866119958565, type: 3}
   m_PrefabInstance: {fileID: 709165529}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &709773836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 709773837}
+  - component: {fileID: 709773839}
+  - component: {fileID: 709773838}
+  m_Layer: 0
+  m_Name: TreeTitle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &709773837
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709773836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1064617146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 309}
+  m_SizeDelta: {x: 953.183, y: 52.749}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &709773838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709773836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "Remedy the Tree and cleanse \nthe air with a tree cure."
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278254079
+  m_fontColor: {r: 1, g: 0.976174, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 45
+  m_fontSizeBase: 45
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 36.14
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &709773839
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709773836}
+  m_CullTransparentMesh: 1
 --- !u!1 &728258543 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3fb021a6401034e4d845164ad204839a, type: 3}
@@ -8323,6 +8465,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8764465893602857641, guid: 362f7d40d1896464f80ae8efe2864367, type: 3}
+      propertyPath: m_text
+      value: "You will only be locked inside if the tree got infected. \n\nIf such
+        a horrid case ever were to happen, Collect le**ns, *ra*g*s, G*ng*r and So*l.\nYou'll
+        need a Wellness Shot and a Soil Remedy. Together, they'll form an excellent
+        cure. \n\nBe careful! Giving the tree the wrong cure will make it difficult
+        to survive."
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8667,8 +8817,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 217, y: -222}
-  m_SizeDelta: {x: 160, y: 89.986}
+  m_AnchoredPosition: {x: 259, y: -286.00494}
+  m_SizeDelta: {x: 192.253, y: 72.173}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819603242
 MonoBehaviour:
@@ -8746,7 +8896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64d38e06941c8ff43b847b6debb2f457, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1a5158fe05bb7742979ae20c3ae7ab2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9306,7 +9456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878955125}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03862319, y: 0.00000003287523, z: -0.0000000012706943, w: 0.99925387}
+  m_LocalRotation: {x: 0.03862319, y: -0.00000003287523, z: 0.0000000012706943, w: 0.99925387}
   m_LocalPosition: {x: -845.25854, y: 5.57, z: -79.237045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9673,7 +9823,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 139}
+  m_AnchoredPosition: {x: 0, y: 16.770004}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &904118141
@@ -10482,7 +10632,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -10508,36 +10658,16 @@ MonoBehaviour:
   isCured: 0
   onPlayerEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2776700440716649731}
-        m_TargetAssemblyTypeName: FlaskPickup, Assembly-CSharp
-        m_MethodName: EForPickupToggler
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onPlayerExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2776700440716649731}
-        m_TargetAssemblyTypeName: FlaskPickup, Assembly-CSharp
-        m_MethodName: EForPickupToggler
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  sicknessBar: {fileID: 65252579}
+      m_Calls: []
+  sicknessBar: {fileID: 1639141729}
   flaskNameText: {fileID: 288543147}
+  interactionPanel: {fileID: 1905803712}
+  door: {fileID: 5500998366649014028}
+  player: {fileID: 4624518208922073174}
+  distressedNPC: {fileID: 226041902}
 --- !u!1 &971341716
 GameObject:
   m_ObjectHideFlags: 0
@@ -11344,7 +11474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033194068}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023195691, y: 0.000000033238866, z: -0.0000000017989065, w: 0.99973094}
+  m_LocalRotation: {x: -0.023195691, y: -0.000000033238866, z: 0.0000000017989065, w: 0.99973094}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11976,6 +12106,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 709773837}
   - {fileID: 904118140}
   - {fileID: 819603241}
   - {fileID: 1590525540}
@@ -12000,14 +12131,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 0.6603774, g: 0.4461021, b: 0.17755428, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 559726abc24c2cd4ca998cf0098bcd54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1a5158fe05bb7742979ae20c3ae7ab2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12107,7 +12238,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1078735964}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 953998939}
+        m_TargetAssemblyTypeName: TreeCurer, Assembly-CSharp
+        m_MethodName: OnSlotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1078735964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12905,13 +13048,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -13264,13 +13407,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -14897,7 +15040,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313087097}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023296416, y: 0.00000003273357, z: -0.000000003302965, w: 0.9997286}
+  m_LocalRotation: {x: 0.023296416, y: -0.00000003273357, z: 0.000000003302965, w: 0.9997286}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16943,8 +17086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -209.01003, y: -222}
-  m_SizeDelta: {x: 160, y: 89.986}
+  m_AnchoredPosition: {x: -252.88509, y: -286.00494}
+  m_SizeDelta: {x: 192.253, y: 72.173}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590525541
 MonoBehaviour:
@@ -17022,7 +17165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64d38e06941c8ff43b847b6debb2f457, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1a5158fe05bb7742979ae20c3ae7ab2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17294,6 +17437,7 @@ GameObject:
   - component: {fileID: 1639141726}
   - component: {fileID: 1639141727}
   - component: {fileID: 1639141728}
+  - component: {fileID: 1639141729}
   m_Layer: 0
   m_Name: ----- Scripts Holder
   m_TagString: Untagged
@@ -17341,6 +17485,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuAnimator: {fileID: 1050980683}
+--- !u!114 &1639141729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639141724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b046a289b8ae684439ff87e4714726c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sicknessIncreaseRate: 0
+  sicknessSlider: {fileID: 865958871}
+  maxSickness: 100
+  decreasingRate: 2
+  player: {fileID: 4624518208922073174}
+  playerRespawnLocation: {x: -892.89, y: 1.71, z: -70.17}
+  sicknessRoom: {fileID: 285814946}
+  treeCurer: {fileID: 953998939}
+  door: {fileID: 5500998366649014028}
 --- !u!1001 &1667050189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19805,10 +19970,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1242343397}
     m_Modifications:
+    - target: {fileID: 1229825591376591002, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
+    - target: {fileID: 1324630842806201116, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
     - target: {fileID: 2086363274223412800, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
       propertyPath: m_Name
       value: Ladder
       objectReference: {fileID: 0}
+    - target: {fileID: 2944298304395471342, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
+    - target: {fileID: 3084370598634545359, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
+    - target: {fileID: 3365631613371777245, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
     - target: {fileID: 3445088053708092438, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.12793465
@@ -19861,6 +20046,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3731795389270889179, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
+    - target: {fileID: 5593706196598399405, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
+    - target: {fileID: 5925523440710593408, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
+    - target: {fileID: 6479633372425584155, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
+    - target: {fileID: 8024506886686380697, guid: 451dc9d0b05c4cf46b6ddad281a37408, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cef9b42836601b9458831622b36178d8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -22243,9 +22448,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 65252578}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: recipes.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
       propertyPath: inventoryBarToggler
       value: 
       objectReference: {fileID: 1336850099}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cc8e5177171faad4396e883f6c3824f7, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 25bdf9665c099ed4bae22b41a3593789, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 76ad04f71c0db5a45ae7419687a8df64, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a0c0c51637615f43875b96e9cf918cd, type: 2}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
       propertyPath: 'craftingSlots.Array.data[0]'
       value: 
@@ -22701,11 +22926,17 @@ PrefabInstance:
       propertyPath: inventoryUI
       value: 
       objectReference: {fileID: 1336850097}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1188155651635303610, guid: 363aa2d3c66c5ec46aaff4ef6f142fd7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 363aa2d3c66c5ec46aaff4ef6f142fd7, type: 3}
+--- !u!1 &4624518208922073174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2079485253624658741, guid: 363aa2d3c66c5ec46aaff4ef6f142fd7, type: 3}
+  m_PrefabInstance: {fileID: 4624518208922073173}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4821169500948418404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23019,9 +23250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 476011322}
-  sicknessRoom: {fileID: 285814946}
-  treeCurer: {fileID: 953998939}
   informativeText: {fileID: 312154320}
+  sicknessBar: {fileID: 1639141729}
 --- !u!1001 &5728246934298840809
 PrefabInstance:
   m_ObjectHideFlags: 0

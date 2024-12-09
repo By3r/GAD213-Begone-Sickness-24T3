@@ -8,9 +8,8 @@ public class Door : MonoBehaviour
 {
     #region Variables
     [SerializeField] private Animator animator;
-    [SerializeField] private SicknessRoom sicknessRoom;
-    [SerializeField] private TreeCurer treeCurer;
     [SerializeField] private TMP_Text informativeText;
+    [SerializeField] private SicknessBar sicknessBar; 
 
     private bool _playerEntered;
     #endregion
@@ -24,10 +23,10 @@ public class Door : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!treeCurer.isCured && sicknessRoom.isPlayerInRoom)
+            if (sicknessBar != null && sicknessBar.IsSicknessBarActive())
             {
-                informativeText.text = "Door is locked!";
-                Invoke("EmptyInformativeText", 0.3f);
+                informativeText.text = "The door is locked, Cure the tree.";
+                Invoke("EmptyInformativeText", 3f);
                 return;
             }
 
@@ -40,17 +39,29 @@ public class Door : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             animator.SetBool("isDoorOpen", false);
-            Debug.Log("Door closed.");
-
-            if (sicknessRoom.isPlayerInRoom)
-            {
-                _playerEntered = true;
-            }
         }
     }
 
     private void EmptyInformativeText()
     {
         informativeText.text = string.Empty;
+    }
+
+    /// <summary>
+    /// Resets the door to its default state.
+    /// </summary>
+    public void ResetDoor()
+    {
+        animator.SetBool("isDoorOpen", false);
+        _playerEntered = false;
+        informativeText.text = string.Empty;
+    }
+
+    /// <summary>
+    /// Forces the door to open programmatically.
+    /// </summary>
+    public void ForceOpen()
+    {
+        animator.SetBool("isDoorOpen", true);
     }
 }

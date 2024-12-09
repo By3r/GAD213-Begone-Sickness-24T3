@@ -17,23 +17,30 @@ public class TreeCurer : MonoBehaviour
     public UnityEvent onPlayerExit;
 
     [SerializeField] private SicknessBar sicknessBar;
-    [SerializeField] private TMP_Text flaskNameText; 
+    [SerializeField] private TMP_Text flaskNameText;
+    [SerializeField] private GameObject interactionPanel;
+    [SerializeField] private Door door;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject distressedNPC;
 
     private Sprite _currentFlask;
     private bool _isPlayerInRange = false;
     private Renderer _treeRenderer;
+    private Material originalTreeMaterial;
     #endregion
 
     private void Start()
     {
         treeCurePanel.SetActive(false);
+        interactionPanel.SetActive(false);
         _treeRenderer = GetComponent<Renderer>();
-        UpdateFlaskName(""); 
+        originalTreeMaterial = _treeRenderer.material;
+        UpdateFlaskName("");
     }
 
     private void Update()
     {
-        if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !isCured && player.activeSelf)
         {
             OpenPanel();
         }
@@ -41,9 +48,16 @@ public class TreeCurer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isCured)
+        if (other.CompareTag("Player") && player.activeSelf)
         {
+            if (isCured)
+            {
+                ToggleInteractionPanel(false);
+                return;
+            }
+
             _isPlayerInRange = true;
+            ToggleInteractionPanel(true);
         }
     }
 
@@ -52,12 +66,13 @@ public class TreeCurer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _isPlayerInRange = false;
+            ToggleInteractionPanel(false);
 
             if (_currentFlask != null)
             {
                 _currentFlask = null;
                 cureSlot.sprite = null;
-                UpdateFlaskName(""); 
+                UpdateFlaskName("");
             }
 
             ClosePanel();
@@ -68,12 +83,13 @@ public class TreeCurer : MonoBehaviour
     {
         treeCurePanel.SetActive(true);
 
-        if (!isCured)
+        if (!isCured || isCured)
         {
             sicknessBar.sicknessSlider.gameObject.SetActive(false);
         }
     }
 
+    #region Public Functions.
     public void ClosePanel()
     {
         treeCurePanel.SetActive(false);
@@ -82,7 +98,7 @@ public class TreeCurer : MonoBehaviour
         {
             _currentFlask = null;
             cureSlot.sprite = null;
-            UpdateFlaskName(""); 
+            UpdateFlaskName("");
         }
 
         if (!isCured)
@@ -100,7 +116,7 @@ public class TreeCurer : MonoBehaviour
             {
                 _currentFlask = null;
                 cureSlot.sprite = null;
-                UpdateFlaskName(""); 
+                UpdateFlaskName("");
             }
         }
     }
@@ -125,8 +141,6 @@ public class TreeCurer : MonoBehaviour
         return false;
     }
 
-
-
     public void ConfirmSelection()
     {
         if (_currentFlask == null)
@@ -137,10 +151,18 @@ public class TreeCurer : MonoBehaviour
         if (_currentFlask == correctFlask)
         {
             isCured = true;
+            distressedNPC.SetActive(false);
             sicknessBar.DecreaseScikness(50f);
             _treeRenderer.material = curedTreeMaterial;
-            sicknessBar.sicknessSlider.gameObject.SetActive(false);
+            sicknessBar.ResetSicknessBar();
             ClosePanel();
+
+            if (door != null)
+            {
+                door.ForceOpen();
+            }
+
+            ToggleInteractionPanel(false);
         }
         else
         {
@@ -152,11 +174,34 @@ public class TreeCurer : MonoBehaviour
         }
     }
 
+    public void ToggleInteractionPanel(bool isVisible)
+    {
+        if (interactionPanel != null)
+        {
+            interactionPanel.SetActive(isVisible);
+        }
+    }
+
+    public void ResetTreeCurer()
+    {
+        isCured = false;
+        _isPlayerInRange = false;
+        _treeRenderer.material = originalTreeMaterial;
+        _currentFlask = null;
+        cureSlot.sprite = null;
+        UpdateFlaskName("");
+        treeCurePanel.SetActive(false);
+        ToggleInteractionPanel(false);
+    }
+    #endregion
+
+    #region Private Functions
     private void UpdateFlaskName(string flaskName)
     {
         if (flaskNameText != null)
         {
-            flaskNameText.text = flaskName; 
+            flaskNameText.text = flaskName;
         }
     }
+    #endregion
 }
