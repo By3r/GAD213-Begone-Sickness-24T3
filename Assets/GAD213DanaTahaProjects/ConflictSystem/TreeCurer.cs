@@ -22,6 +22,7 @@ public class TreeCurer : MonoBehaviour
     [SerializeField] private Door door;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject distressedNPC;
+    [SerializeField] private InventoryBarToggler inventoryBarToggler;
 
     private Sprite _currentFlask;
     private bool _isPlayerInRange = false;
@@ -43,6 +44,7 @@ public class TreeCurer : MonoBehaviour
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !isCured && player.activeSelf)
         {
             OpenPanel();
+            inventoryBarToggler.ToggleInventoryBar();
         }
     }
 
@@ -93,6 +95,7 @@ public class TreeCurer : MonoBehaviour
     public void ClosePanel()
     {
         treeCurePanel.SetActive(false);
+        inventoryBarToggler.ToggleInventoryBar();
 
         if (_currentFlask != null)
         {

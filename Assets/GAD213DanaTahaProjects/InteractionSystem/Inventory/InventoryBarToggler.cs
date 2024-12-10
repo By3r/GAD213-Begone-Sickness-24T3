@@ -4,8 +4,7 @@ public class InventoryBarToggler : MonoBehaviour
 {
     #region Variables
     public Animator animator;
-
-    private bool _inventoryBarOpen = false;
+    public bool inventoryBarOpen = false;
 
     #endregion
 
@@ -16,7 +15,7 @@ public class InventoryBarToggler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) && !inventoryBarOpen)
         {
             ToggleInventoryBar();
         }
@@ -24,7 +23,7 @@ public class InventoryBarToggler : MonoBehaviour
 
     public void ToggleInventoryBar()
     {
-        animator.SetBool("InventoryOpen", _inventoryBarOpen);
-        _inventoryBarOpen = !_inventoryBarOpen;
+        animator.SetBool("InventoryOpen", inventoryBarOpen);
+        inventoryBarOpen = !inventoryBarOpen;
     }
 }

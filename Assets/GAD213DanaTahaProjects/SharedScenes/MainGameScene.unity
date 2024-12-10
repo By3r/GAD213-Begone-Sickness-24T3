@@ -3636,7 +3636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320873463}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.00000004669622, z: 0.0000000036152081, w: 1}
+  m_LocalRotation: {x: -0, y: 0.000000046689742, z: -0.0000000036147072, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9456,7 +9456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878955125}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03862319, y: -0.00000003287523, z: 0.0000000012706943, w: 0.99925387}
+  m_LocalRotation: {x: 0.03862319, y: 0.000000032875707, z: -0.0000000012707131, w: 0.99925387}
   m_LocalPosition: {x: -845.25854, y: 5.57, z: -79.237045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10668,6 +10668,7 @@ MonoBehaviour:
   door: {fileID: 5500998366649014028}
   player: {fileID: 4624518208922073174}
   distressedNPC: {fileID: 226041902}
+  inventoryBarToggler: {fileID: 1336850099}
 --- !u!1 &971341716
 GameObject:
   m_ObjectHideFlags: 0
@@ -11474,7 +11475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033194068}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023195691, y: -0.000000033238866, z: 0.0000000017989065, w: 0.99973094}
+  m_LocalRotation: {x: -0.023195691, y: 0.000000031920685, z: -0.0000000017275659, w: 0.99973094}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15040,7 +15041,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313087097}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023296416, y: -0.00000003273357, z: 0.000000003302965, w: 0.9997286}
+  m_LocalRotation: {x: 0.023296416, y: 0.000000032725985, z: -0.0000000033021987, w: 0.9997286}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15308,6 +15309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1336850098}
+  inventoryBarOpen: 0
 --- !u!1 &1338457277
 GameObject:
   m_ObjectHideFlags: 0
@@ -22449,28 +22451,56 @@ PrefabInstance:
       objectReference: {fileID: 65252578}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
       propertyPath: recipes.Array.size
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
       propertyPath: inventoryBarToggler
       value: 
       objectReference: {fileID: 1336850099}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
-      propertyPath: 'recipes.Array.data[5]'
+      propertyPath: 'recipes.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: cc8e5177171faad4396e883f6c3824f7, type: 2}
+      objectReference: {fileID: 11400000, guid: 6a0c0c51637615f43875b96e9cf918cd, type: 2}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
-      propertyPath: 'recipes.Array.data[6]'
+      propertyPath: 'recipes.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 25bdf9665c099ed4bae22b41a3593789, type: 2}
+      objectReference: {fileID: 11400000, guid: e22a0ccafac33584e8be4e76c4dc7244, type: 2}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
-      propertyPath: 'recipes.Array.data[7]'
+      propertyPath: 'recipes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ac7a5b647956c1748bbe274dba698f3f, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a070e3525a40190429a886f6efa094be, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[4]'
       value: 
       objectReference: {fileID: 11400000, guid: 76ad04f71c0db5a45ae7419687a8df64, type: 2}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 25bdf9665c099ed4bae22b41a3593789, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cc8e5177171faad4396e883f6c3824f7, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 24abd0fafd485a743b076f42193d5147, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
       propertyPath: 'recipes.Array.data[8]'
       value: 
-      objectReference: {fileID: 11400000, guid: 6a0c0c51637615f43875b96e9cf918cd, type: 2}
+      objectReference: {fileID: 11400000, guid: 6016b74ea099d414ea8ca9891a0b73ab, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 901aa85fecaf593449ceb855df23b6bb, type: 2}
+    - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
+      propertyPath: 'recipes.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e58a3fafae20ebf4885057ce84a836b6, type: 2}
     - target: {fileID: 582539028443973177, guid: 3cae3560b11bee2409b100f8b09650ab, type: 3}
       propertyPath: 'craftingSlots.Array.data[0]'
       value: 
@@ -22592,6 +22622,10 @@ PrefabInstance:
       propertyPath: inventoryBarToggler
       value: 
       objectReference: {fileID: 1336850099}
+    - target: {fileID: 6957518197932291049, guid: 867dc688a7166154d9e0cc24dc076f9c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2351d83971fc89a40a33b9697ffd2c03, type: 2}
     - target: {fileID: 8125968365841680518, guid: 867dc688a7166154d9e0cc24dc076f9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -891.74
@@ -22729,6 +22763,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParacetamolTable
       objectReference: {fileID: 0}
+    - target: {fileID: 5875388511359510201, guid: 698a12e683776174a824f56961a81daa, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2351d83971fc89a40a33b9697ffd2c03, type: 2}
     - target: {fileID: 6550718903834545893, guid: 698a12e683776174a824f56961a81daa, type: 3}
       propertyPath: m_Size.x
       value: 0.030969247
@@ -22797,6 +22835,10 @@ PrefabInstance:
       propertyPath: inventoryBarToggler
       value: 
       objectReference: {fileID: 1336850099}
+    - target: {fileID: 5415220450802596408, guid: 542ff09dd0c746e41bbbff0cff920b36, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2351d83971fc89a40a33b9697ffd2c03, type: 2}
     - target: {fileID: 5775380809085836269, guid: 542ff09dd0c746e41bbbff0cff920b36, type: 3}
       propertyPath: m_Name
       value: GingerTable
@@ -23025,6 +23067,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 6900241136094194195, guid: 5d6c53ed54bca674cb3e0dbd5c55ecbc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2351d83971fc89a40a33b9697ffd2c03, type: 2}
     - target: {fileID: 9118636585194599415, guid: 5d6c53ed54bca674cb3e0dbd5c55ecbc, type: 3}
       propertyPath: m_Size.x
       value: 0.043505985
@@ -23348,6 +23394,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 65252578}
+    - target: {fileID: 6435006035162672520, guid: f16038f456580a24a975f862146ff922, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2351d83971fc89a40a33b9697ffd2c03, type: 2}
     - target: {fileID: 7116010444175351027, guid: f16038f456580a24a975f862146ff922, type: 3}
       propertyPath: m_Size.x
       value: 0.03265715

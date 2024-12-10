@@ -38,7 +38,6 @@ public class FlaskPickup : MonoBehaviour
     {
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E) && inventory != null)
         {
-            inventoryBarToggler.ToggleInventoryBar();
             FlaskPickup flaskData = GetComponent<FlaskPickup>();
             if (flaskData != null)
             {
@@ -52,9 +51,15 @@ public class FlaskPickup : MonoBehaviour
                     Debug.Log("Inventory is full!");
                 }
             }
-            Invoke("ToggleInventoryBarForSomeTime", 1.5f);
+
+            if (inventoryBarToggler.inventoryBarOpen)
+            {
+                inventoryBarToggler.ToggleInventoryBar();
+                Invoke("ToggleInventoryBarForSomeTime", 1.5f);
+            }
         }
     }
+
 
     #region Public Functions.
     public void EForPickupToggler()
