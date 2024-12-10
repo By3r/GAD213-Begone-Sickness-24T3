@@ -122,6 +122,7 @@ public class SicknessBar : MonoBehaviour
         sicknessSlider.gameObject.SetActive(ttrue);
         sicknessSlider.maxValue = maxSicknessValue;
         sicknessSlider.value = currentSicknessValue;
+        SetSicknessIncreaseRate(0.5f);
     }
 
     private void SetPlayerBackAsActive()
