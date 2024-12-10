@@ -52,30 +52,29 @@ public class FlaskPickup : MonoBehaviour
                 }
             }
 
-            if (inventoryBarToggler.inventoryBarOpen)
+            if (!inventoryBarToggler.inventoryBarOpen)
             {
-                inventoryBarToggler.ToggleInventoryBar();
-                Invoke("ToggleInventoryBarForSomeTime", 1.5f);
+                inventoryBarToggler.UpdateInventoryBarState(true);
+                Invoke("HideInventoryBar", 3f); // Schedule hiding the inventory bar after 3 seconds
             }
         }
     }
 
-
-    #region Public Functions.
+    #region Public Functions
     public void EForPickupToggler()
     {
         if (ePanel != null)
         {
-
             ePanel.SetActive(!ePanel.activeSelf);
         }
     }
-    #endregion
 
-    #region Private Functions
-    private void ToggleInventoryBarForSomeTime()
+    public void HideInventoryBar()
     {
-        inventoryBarToggler.ToggleInventoryBar();
+        if (inventoryBarToggler.inventoryBarOpen)
+        {
+            inventoryBarToggler.UpdateInventoryBarState(false); // Hide the inventory bar
+        }
     }
     #endregion
 }

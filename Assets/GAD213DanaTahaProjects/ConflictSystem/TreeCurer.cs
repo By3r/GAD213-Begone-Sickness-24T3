@@ -44,7 +44,10 @@ public class TreeCurer : MonoBehaviour
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !isCured && player.activeSelf)
         {
             OpenPanel();
-            inventoryBarToggler.ToggleInventoryBar();
+            if (!inventoryBarToggler.inventoryBarOpen)
+            {
+                inventoryBarToggler.UpdateInventoryBarState(true);
+            }
         }
     }
 
@@ -84,18 +87,14 @@ public class TreeCurer : MonoBehaviour
     public void OpenPanel()
     {
         treeCurePanel.SetActive(true);
-
-        if (!isCured || isCured)
-        {
-            sicknessBar.sicknessSlider.gameObject.SetActive(false);
-        }
+        sicknessBar.sicknessSlider.gameObject.SetActive(false);
     }
 
     #region Public Functions.
     public void ClosePanel()
     {
         treeCurePanel.SetActive(false);
-        inventoryBarToggler.ToggleInventoryBar();
+        inventoryBarToggler.UpdateInventoryBarState(false); 
 
         if (_currentFlask != null)
         {

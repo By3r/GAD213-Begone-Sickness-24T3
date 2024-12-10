@@ -10,20 +10,27 @@ public class InventoryBarToggler : MonoBehaviour
 
     void Start()
     {
-        ToggleInventoryBar();
+        UpdateInventoryBarState(false); 
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B) && !inventoryBarOpen)
+        if (Input.GetKeyDown(KeyCode.B))
         {
             ToggleInventoryBar();
         }
     }
 
+    #region Public Functions.
     public void ToggleInventoryBar()
     {
-        animator.SetBool("InventoryOpen", inventoryBarOpen);
-        inventoryBarOpen = !inventoryBarOpen;
+        UpdateInventoryBarState(!inventoryBarOpen);
     }
+
+    public void UpdateInventoryBarState(bool isOpen)
+    {
+        inventoryBarOpen = isOpen;
+        animator.SetBool("InventoryOpen", inventoryBarOpen);
+    }
+    #endregion
 }

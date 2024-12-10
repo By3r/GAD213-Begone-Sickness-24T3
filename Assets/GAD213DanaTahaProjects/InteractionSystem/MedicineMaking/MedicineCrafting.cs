@@ -33,8 +33,13 @@ public class MedicineCrafting : MonoBehaviour
             if (!_isCraftingUIOpen)
             {
                 OpenCraftingUI();
+                inventoryBarToggler.UpdateInventoryBarState(true); 
                 onPlayerExitTrigger.Invoke();
-                inventoryBarToggler.ToggleInventoryBar();
+            }
+            else
+            {
+                CloseCraftingUI();
+                inventoryBarToggler.UpdateInventoryBarState(false);
             }
         }
     }
@@ -59,6 +64,7 @@ public class MedicineCrafting : MonoBehaviour
             if (_isCraftingUIOpen)
             {
                 CloseCraftingUI();
+                inventoryBarToggler.UpdateInventoryBarState(false); 
             }
         }
     }
@@ -76,7 +82,7 @@ public class MedicineCrafting : MonoBehaviour
     {
         craftingUI.SetActive(false);
         _isCraftingUIOpen = false;
-        // ReturnIngredients();
+        ReturnIngredients();
         ClearCraftingSlots();
     }
 
@@ -106,12 +112,8 @@ public class MedicineCrafting : MonoBehaviour
         if (!_isCraftingUIOpen || _craftingItems[slotIndex] == null) return;
 
         Sprite flaskSprite = _craftingItems[slotIndex];
-
         bool added = playerInventory.AddFlask(null, flaskSprite);
-        if (!added)
-        {
-            return;
-        }
+        if (!added) return;
 
         _craftingItems[slotIndex] = null;
         craftingSlots[slotIndex].sprite = null;

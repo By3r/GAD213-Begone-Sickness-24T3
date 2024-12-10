@@ -3793,7 +3793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320873463}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.00000004669622, z: -0.0000000036152081, w: 1}
+  m_LocalRotation: {x: -0, y: -0.00000004669622, z: 0.0000000036152081, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8625,10 +8625,10 @@ PrefabInstance:
     - target: {fileID: 8764465893602857641, guid: 362f7d40d1896464f80ae8efe2864367, type: 3}
       propertyPath: m_text
       value: "You will only be locked inside if the tree got infected. \n\nIf such
-        a horrid case ever were to happen, Collect le**ns, *ra*g*s, G*ng*r and So*l.\nYou'll
-        need a Wellness Shot and a Soil Remedy. Together, they'll form an excellent
-        cure. \n\nBe careful! Giving the tree the wrong cure will make it difficult
-        to survive."
+        a horrid case were to ever happen, Collect Lemon, Orange, Ginger and Soil.\nYou'll
+        need a Wellness Shot and a Soil Remedy. Mixing them together wil form an
+        excellent cure. \n\nBe careful! Giving the tree the wrong cure will make
+        it difficult to survive."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9613,7 +9613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878955125}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03862319, y: 0.00000003287523, z: -0.0000000012706943, w: 0.99925387}
+  m_LocalRotation: {x: 0.03862319, y: -0.00000003287523, z: 0.0000000012706943, w: 0.99925387}
   m_LocalPosition: {x: -845.25854, y: 5.57, z: -79.237045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11634,7 +11634,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033194068}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023195693, y: 0.00000003323887, z: -0.0000000017989065, w: 0.99973094}
+  m_LocalRotation: {x: -0.023195693, y: -0.000000031928273, z: 0.0000000017279762, w: 0.99973094}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15472,7 +15472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313087097}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023296416, y: 0.00000003273357, z: -0.000000003302965, w: 0.9997286}
+  m_LocalRotation: {x: 0.023296416, y: -0.00000003273357, z: 0.000000003302965, w: 0.9997286}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5712652, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24189,8 +24189,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9696522, y: 1.0552709, z: 4.361222}
-  m_Center: {x: 0.1925028, y: 0.70596784, z: -0.16227323}
+  m_Size: {x: 2.7337093, y: 1.0552709, z: 4.361222}
+  m_Center: {x: 0.072351135, y: 0.70596784, z: -0.16227332}
 --- !u!114 &5500998366649014028
 MonoBehaviour:
   m_ObjectHideFlags: 0
