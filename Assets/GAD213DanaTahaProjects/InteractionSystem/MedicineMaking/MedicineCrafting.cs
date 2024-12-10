@@ -37,13 +37,6 @@ public class MedicineCrafting : MonoBehaviour
                 inventoryBarToggler.ToggleInventoryBar();
             }
         }
-
-        if (_isCraftingUIOpen && Input.GetKeyDown(KeyCode.Escape))
-        {
-            onPlayerEnterTrigger.Invoke();
-            CloseCraftingUI();
-            inventoryBarToggler.ToggleInventoryBar();
-        }
     }
 
     #region Trigger Events

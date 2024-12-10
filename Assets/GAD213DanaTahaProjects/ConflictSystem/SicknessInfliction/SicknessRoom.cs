@@ -4,8 +4,10 @@ public class SicknessRoom : MonoBehaviour
 {
     #region Variables
     public bool isPlayerInRoom;
+
     [SerializeField] private SicknessBar sicknessBar;
     [SerializeField] private TreeCurer treeCurer;
+    [SerializeField] private GameObject dangerPanelPopup;
 
     #endregion
 
@@ -14,6 +16,14 @@ public class SicknessRoom : MonoBehaviour
         isPlayerInRoom = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && treeCurer.isCured == false)
+        {
+            dangerPanelPopup.SetActive(true);
+            Invoke("CloseDangerPanelPopUp", 8f);
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && treeCurer.isCured == false)
@@ -41,5 +51,10 @@ public class SicknessRoom : MonoBehaviour
     {
         isPlayerInRoom = false;
         sicknessBar.ExitSicknessRoom();
+    }
+
+    private void CloseDangerPanelPopUp()
+    {
+        dangerPanelPopup.SetActive(false);
     }
 }
