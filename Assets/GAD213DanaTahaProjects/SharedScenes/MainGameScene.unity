@@ -10828,6 +10828,8 @@ MonoBehaviour:
   player: {fileID: 4624518208922073174}
   distressedNPC: {fileID: 226041902}
   inventoryBarToggler: {fileID: 1336850099}
+  curedTreeMinimapSprite: {fileID: 21300000, guid: a9708dd4e22c0c04c8984157b74b7cca, type: 3}
+  uncuredTreeMinimap: {fileID: 1948596109}
 --- !u!1 &971341716
 GameObject:
   m_ObjectHideFlags: 0

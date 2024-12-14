@@ -23,11 +23,14 @@ public class TreeCurer : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject distressedNPC;
     [SerializeField] private InventoryBarToggler inventoryBarToggler;
+    [SerializeField] private Sprite curedTreeMinimapSprite;
+    [SerializeField] private SpriteRenderer uncuredTreeMinimap;
 
     private Sprite _currentFlask;
     private bool _isPlayerInRange = false;
     private Renderer _treeRenderer;
     private Material originalTreeMaterial;
+
     #endregion
 
     private void Start()
@@ -94,7 +97,7 @@ public class TreeCurer : MonoBehaviour
     public void ClosePanel()
     {
         treeCurePanel.SetActive(false);
-        inventoryBarToggler.UpdateInventoryBarState(false); 
+        inventoryBarToggler.UpdateInventoryBarState(false);
 
         if (_currentFlask != null)
         {
@@ -156,6 +159,7 @@ public class TreeCurer : MonoBehaviour
             distressedNPC.SetActive(false);
             sicknessBar.DecreaseScikness(50f);
             _treeRenderer.material = curedTreeMaterial;
+            uncuredTreeMinimap.sprite = curedTreeMinimapSprite;
             sicknessBar.ResetSicknessBar();
             ClosePanel();
 
